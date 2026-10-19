@@ -2081,7 +2081,7 @@ function resetB(){kidsB.forEach(k=>{k.g.visible=true;k.exiting=false;k.sit=true;
  RT.lights.forEach(L=>{L.passed=false;L.commit=false;L.crossed=false;L.peds.forEach((p,i)=>{p.pos.x=i?11:-5;p.tx=undefined})});RT.zeb.forEach(Z=>{Z.state=0;Z.peds.forEach((p,i)=>{p.pos.x=i?11:-5;p.tx=undefined})});DOORB.a=1}
 function pmPick(){const dT=dist2(girl,teach),dH=dist2(girl,helC),t=!thanked.t&&dT<3.8,h=!thanked.h&&dH<3.8;if(t&&h)return dT<=dH?'t':'h';return t?'t':h?'h':null}
 /* zoom + talk */
-const ZR={W:[2,10],Q:[2,10],Y:[3,22],T:[3,18],N:[2.5,20],S:[3,30],A:[3.5,70],B:[1.6,7.5],C:[3.5,45],D:[1.4,15],H:[3,48],E:[3,32],L:[3,32],M:[3,26],K:[3,16]};
+const ZR={W:[2,10],Q:[2,10],Y:[3,20],T:[3,24],N:[2.5,20],S:[3,30],A:[3.5,70],B:[1.6,7.5],C:[3.5,45],D:[1.4,15],H:[3,48],E:[3,32],L:[3,32],M:[3,26],K:[3,16]};
 const ZO=1.18,PDN=7*Math.PI/180;function lowOff(c,v){const dx=v.x-c.x,dy=v.y-c.y,dz=v.z-c.z,h=Math.hypot(dx,dz),L=Math.hypot(h,dy);if(L<1e-4)return v;let e=Math.atan2(dy,h);e=Math.max(.03,e-PDN);const hh=Math.cos(e)*L,k=h>1e-4?hh/h:0;return V(c.x+dx*k,c.y+Math.sin(e)*L,c.z+dz*k)}let CZ=1;function zoomBy(k){const r=ZR[scene];dist=cl(dist*k,r[0],r[1])}
 function defView(){const gy=girl.yaw;if(FP.on){yaw=gy+Math.PI;pitch=-.8;return}if(scene==='L'){yaw=(BR.on&&BR.lYaw&&girl.pos.z>3.2)?-Math.PI*.78:0;pitch=.42;dist=9.5}else if(scene==='M'){yaw=0;pitch=1.25;dist=13}else if(scene==='K'){yaw=-Math.PI/2-.35;pitch=.12;dist=10.6}else if(scene==='E'){yaw=0;pitch=BR.on?.6:.5;dist=BR.on?10.5:5.4}else if(scene==='H'){yaw=0;pitch=.6;dist=8.5}else if(scene==='B'){if(phase==='drive'){yaw=-.43;pitch=.35;dist=4.2}else{yaw=Math.PI+.43;pitch=.456;dist=3.1}}else if(scene==='D'){yaw=gy;pitch=.36;dist=13.5}else if(scene==='C'){if(phase==='pm1'||phase==='pm2'){yaw=Math.PI+.35;pitch=.42;dist=14}else{yaw=gy;pitch=.4;dist=21.5}}else{yaw=gy;pitch=.38;dist=19.5}swC=0;swA=0}
 $('dv').onclick=defView;{const b=document.createElement('button');b.id='fpb';b.hidden=true;b.style.cssText='position:fixed;left:12px;bottom:max(16px,env(safe-area-inset-bottom));padding:8px 14px;font:600 15px Fredoka,system-ui,sans-serif;border:0;border-radius:999px;background:#3d8bfd;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.28);cursor:pointer;z-index:5';b.onclick=()=>{if(BF.on)bfOff();else bfOn()};document.body.appendChild(b)}$('zi').onclick=()=>zoomBy(.8);$('zo').onclick=()=>zoomBy(1.25);
@@ -3564,7 +3564,7 @@ function satArtXZ(u,v){return V((u/512-.5)*.52,.52,-.72+(v/384-.5)*.39)}
    two changing rooms at the west end); dance studio: x -10..10, z -16..-6 behind a glass wall with a glass door in the middle;
    lift lobby outside the entrance: x -9..-1, z 6..10 */
 const SY={liftL:[],gL:[],cL:null,cls:[],big:[],staff:[],par:[],tea:null,mama:null,rooms:[-4.1,-.9]};
-(function(){const P=new THREE.Group(),H=5.2;P.scale.set(2.25,1,2.25);GY.add(P);SY.geo=P;
+(function(){const P=new THREE.Group(),H=5.2;P.scale.set(1.5,1,1.5);GY.add(P);SY.geo=P;
  const tileT=satTx(256,256,(g,w,h)=>{g.fillStyle='#cfcac2';g.fillRect(0,0,w,h);for(let y=0;y<4;y++)for(let x=0;x<4;x++){g.fillStyle=['#d4cfc7','#c9c3ba','#d8d3cc'][(x+y*3)%3];g.fillRect(x*64+1,y*64+1,62,62)}},4,2);
  const wd=satTx(256,256,(g,w,h)=>{for(let i=0;i<8;i++){g.fillStyle=['#e6cfae','#ddc29d','#e9d4b5','#e0c8a4'][i%4];g.fillRect(0,i*32,w,32);g.fillStyle='rgba(140,100,60,.18)';g.fillRect(0,i*32,w,1.5);g.fillRect((i*71)%w,i*32,1.5,32)}},6,4);
  const gf=satTx(256,256,(g,w,h)=>{g.fillStyle='#a9adb3';g.fillRect(0,0,w,h);for(let i=0;i<300;i++){g.fillStyle='rgba(255,255,255,'+(rnd()*.06)+')';g.fillRect(rnd()*w,rnd()*h,2,2)}g.fillStyle='rgba(0,0,0,.08)';g.fillRect(0,0,w,2)},6,3);
@@ -3573,9 +3573,9 @@ const SY={liftL:[],gL:[],cL:null,cls:[],big:[],staff:[],par:[],tea:null,mama:nul
  /* floors and ceilings */
  satPl(P,20,12,0,0,0,0,new THREE.MeshStandardMaterial({map:wd,roughness:.55}),-Math.PI/2);
  satPl(P,20,10,0,.004,-11,0,new THREE.MeshStandardMaterial({map:gf,roughness:.35}),-Math.PI/2);
- satPl(P,8,4,-5,0,8,0,new THREE.MeshStandardMaterial({map:tileT,roughness:.5}),-Math.PI/2);
- satPl(P,20,12,0,H,0,0,M(0xffffff,{roughness:1}),Math.PI/2);satPl(P,20,10,0,H,-11,0,M(0xffffff,{roughness:1}),Math.PI/2);satPl(P,8,4,-5,H,8,0,M(0xf6f4f0),Math.PI/2);
- [-6,-2,2,6].forEach(x=>[-3,2.5].forEach(z=>satBx(P,1.4,.04,.5,x,H-.03,z,lamp)));[-6,-2,2,6].forEach(x=>[-13.5,-9].forEach(z=>satBx(P,1.4,.04,.5,x,H-.03,z,lamp)));[-7,-3].forEach(x=>satBx(P,1.2,.04,.4,x,H-.03,8,lamp));
+ satPl(P,14,6,-5,0,9,0,new THREE.MeshStandardMaterial({map:tileT,roughness:.5}),-Math.PI/2);
+ satPl(P,20,12,0,H,0,0,M(0xffffff,{roughness:1}),Math.PI/2);satPl(P,20,10,0,H,-11,0,M(0xffffff,{roughness:1}),Math.PI/2);satPl(P,14,6,-5,H,9,0,M(0xf6f4f0),Math.PI/2);
+ [-6,-2,2,6].forEach(x=>[-3,2.5].forEach(z=>satBx(P,1.4,.04,.5,x,H-.03,z,lamp)));[-6,-2,2,6].forEach(x=>[-13.5,-9].forEach(z=>satBx(P,1.4,.04,.5,x,H-.03,z,lamp)));[-9,-5,-1].forEach(x=>satBx(P,1.2,.04,.4,x,H-.03,9,lamp));
  /* reception walls */
  satPl(P,12,H,-10,H/2,0,Math.PI/2,rw);satPl(P,12,H,10,H/2,0,-Math.PI/2,rw);
  satPl(P,4,H,-8,H/2,6,Math.PI,rw);satPl(P,14,H,3,H/2,6,Math.PI,rw);satPl(P,2,H-2.6,-5,(H+2.6)/2,6,Math.PI,rw);
@@ -3632,16 +3632,17 @@ const SY={liftL:[],gL:[],cL:null,cls:[],big:[],staff:[],par:[],tea:null,mama:nul
  /* little sitting mats in the studio */
  [-2.4,-1.2,0,1.2,2.4].forEach((x,i)=>{const m=new THREE.Mesh(new THREE.CircleGeometry(.36,24),M([0xf7c6d3,0xffe3b3,0xcfe8ff,0xf7c6d3,0xd9f2d0][i],{roughness:1}));m.rotation.x=-Math.PI/2;m.position.set(x,.012,-10.4);P.add(m)});
  /* lift lobby (outside the green-dot entrance) */
- satPl(P,4,H,-9,H/2,8,Math.PI/2,lw);satPl(P,4,H,-1,H/2,8,-Math.PI/2,lw);
- satPl(P,2.7,H,-7.65,H/2,10,Math.PI,lw);satPl(P,2.7,H,-2.35,H/2,10,Math.PI,lw);satPl(P,2.6,H-2.6,-5,(H+2.6)/2,10,Math.PI,lw);
- satPl(P,3,H,-7.5,H/2,6,0,lw);satPl(P,3,H,-2.5,H/2,6,0,lw);satPl(P,2,H-2.4,-5,(H+2.4)/2,6,0,lw);
- satPl(P,2.6,2,-5,0,11,0,new THREE.MeshStandardMaterial({map:tileT,roughness:.5}),-Math.PI/2);
- satPl(P,2.6,2.6,-5,1.3,12,Math.PI,stl);satPl(P,2,2.6,-6.3,1.3,11,Math.PI/2,stl);satPl(P,2,2.6,-3.7,1.3,11,-Math.PI/2,stl);satPl(P,2.6,2,-5,2.6,11,0,M(0xffffff,{emissive:0xfff2d0,emissiveIntensity:.8}),Math.PI/2);
- satBx(P,2.6,.5,.12,-5,2.75,9.95,M(0x8c939a,{metalness:.5,roughness:.35}));[-1,1].forEach(s=>satBx(P,.2,2.5,.14,-5+s*1.1,1.25,9.95,M(0x8c939a,{metalness:.5,roughness:.35})));
- [-1,1].forEach(s=>{const d=satBx(P,.9,2.45,.05,-5+s*.45,1.225,9.92,stl);d.userData.x0=-5+s*.45;d.userData.s=s;SY.liftL.push(d)});
- satBx(P,.16,.3,.04,-3.4,1.2,9.96,M(0x2b2f36));
- const fT=satTx(128,64,(g,w,h)=>{g.fillStyle='#111';g.fillRect(0,0,w,h);g.fillStyle='#ff7a3d';g.font='700 44px monospace';g.textAlign='center';g.textBaseline='middle';g.fillText('8 ▲',64,34)});satPl(P,.5,.25,-5,2.75,9.87,Math.PI,new THREE.MeshBasicMaterial({map:fT}));
- pot(-8.5,9.5,.9);pot(-1.5,9.5,.9);
+ satPl(P,6,H,-12,H/2,9,Math.PI/2,lw);satPl(P,6,H,2,H/2,9,-Math.PI/2,lw);
+ satPl(P,5.7,H,-9.15,H/2,12,Math.PI,lw);satPl(P,5.7,H,-.85,H/2,12,Math.PI,lw);satPl(P,2.6,H-2.6,-5,(H+2.6)/2,12,Math.PI,lw);
+ satPl(P,6,H,-9,H/2,6,0,lw);satPl(P,6,H,-1,H/2,6,0,lw);satPl(P,2,H-2.4,-5,(H+2.4)/2,6,0,lw);
+ satPl(P,2.6,2,-5,0,13,0,new THREE.MeshStandardMaterial({map:tileT,roughness:.5}),-Math.PI/2);
+ satPl(P,2.6,2.6,-5,1.3,14,Math.PI,stl);satPl(P,2,2.6,-6.3,1.3,13,Math.PI/2,stl);satPl(P,2,2.6,-3.7,1.3,13,-Math.PI/2,stl);satPl(P,2.6,2,-5,2.6,13,0,M(0xffffff,{emissive:0xfff2d0,emissiveIntensity:.8}),Math.PI/2);
+ satBx(P,2.6,.5,.12,-5,2.75,11.95,M(0x8c939a,{metalness:.5,roughness:.35}));[-1,1].forEach(s=>satBx(P,.2,2.5,.14,-5+s*1.1,1.25,11.95,M(0x8c939a,{metalness:.5,roughness:.35})));
+ [-1,1].forEach(s=>{const d=satBx(P,.9,2.45,.05,-5+s*.45,1.225,11.92,stl);d.userData.x0=-5+s*.45;d.userData.s=s;SY.liftL.push(d)});
+ satBx(P,.16,.3,.04,-3.4,1.2,11.96,M(0x2b2f36));satBx(P,1.9,2.45,.05,-9.3,1.225,11.95,stl);satBx(P,.16,.3,.04,-7.8,1.2,11.96,M(0x2b2f36));
+ [[-11.4,8.5],[-11.4,10.2]].forEach(a=>{satBx(P,.5,.42,1.4,a[0],.21,a[1],M(0xb98a58))});
+ const fT=satTx(128,64,(g,w,h)=>{g.fillStyle='#111';g.fillRect(0,0,w,h);g.fillStyle='#ff7a3d';g.font='700 44px monospace';g.textAlign='center';g.textBaseline='middle';g.fillText('8 ▲',64,34)});satPl(P,.5,.25,-5,2.75,11.87,Math.PI,new THREE.MeshBasicMaterial({map:fT}));
+ pot(-11.3,11.4,.9);pot(1.3,11.4,.9);pot(1.3,6.6,.8);
  /* entrance (green dot): glass sliding doors with the red and white sign */
  const sg=satTx(1024,256,(g,w,h)=>{g.fillStyle='#d7262f';g.fillRect(0,0,w,h);g.fillStyle='#fff';g.fillRect(0,h*.62,w,h*.38);g.fillStyle='#fff';g.font='700 92px "PingFang TC","Noto Sans TC",system-ui,sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('小天鵝芭蕾舞學校',w/2,84);g.fillStyle='#d7262f';g.font='700 66px Fredoka,system-ui,sans-serif';g.fillText('Little Swan Ballet School',w/2,200);
   g.strokeStyle='#fff';g.lineWidth=6;g.beginPath();g.arc(70,84,34,Math.PI*.2,Math.PI*1.4);g.stroke();g.beginPath();g.arc(954,84,34,-Math.PI*.4,Math.PI*.8);g.stroke()});
@@ -3653,19 +3654,19 @@ const SY={liftL:[],gL:[],cL:null,cls:[],big:[],staff:[],par:[],tea:null,mama:nul
  satPl(P,.6,.75,-3.0,1.45,6.04,0,new THREE.MeshBasicMaterial({map:nt}));
  /* keep pictures, signs and small furniture their real size inside the bigger building */
  P.children.forEach(o=>{if(!o.isMesh||o.userData.x0!==undefined)return;const g=o.geometry;if(!g.boundingBox)g.computeBoundingBox();const b=g.boundingBox,sx=(b.max.x-b.min.x)*o.scale.x,sz=(b.max.z-b.min.z)*o.scale.z,flat=Math.abs(Math.abs(o.rotation.x)-Math.PI/2)<.01;
-  if(g.type==='PlaneGeometry'){if(!flat&&o.material&&o.material.map&&sx<4.3)o.scale.x/=2.25}else if(g.type!=='CircleGeometry'&&g.type!=='RingGeometry'&&sx<.75&&sz<.75){o.scale.x/=2.25;o.scale.z/=2.25}});
+  if(g.type==='PlaneGeometry'){if(!flat&&o.material&&o.material.map&&sx<4.3)o.scale.x/=1.5}else if(g.type!=='CircleGeometry'&&g.type!=='RingGeometry'&&sx<.75&&sz<.75){o.scale.x/=1.5;o.scale.z/=1.5}});
 })();
 /* door / lift animation */
 function satYDoors(dt){const k=Math.min(1,dt*3);SY.liftL.forEach(d=>{const tx=d.userData.x0+(SAT.liftOpen?d.userData.s*.85:0);d.position.x+=(tx-d.position.x)*k});
  SY.gL.forEach(g=>{const tx=g.userData.x0+(SAT.gOpen?g.userData.s*.95:0);g.position.x+=(tx-g.position.x)*k});
  if(SY.cL){const tr=SAT.cOpen?1.55:0;SY.cL.rotation.y+=(tr-SY.cL.rotation.y)*k}}
 /* walkable areas of the ballet school */
-const SYOB=[[3.15,-0.675,22.5,13.5],[-22.5,-12.712,-16.2,-12.487],[-22.5,-5.738,-16.2,-5.512],[-22.5,1.237,-16.2,1.462],[-16.312,-12.6,-16.087,-10.35],[-16.312,-8.1,-16.087,-5.512],[-16.312,-5.738,-16.087,-3.15],[-16.312,-0.9,-16.087,1.462],[-9.562,12.038,2.362,13.5],[-22.5,3.6,-21.375,11.7]];
-function satYClamp(p){const R=[[-19.575,14.175,-2.925,21.825],[-21.825,-12.825,21.825,12.825]];if(SAT.gOpen)R.push([-13.275,12.15,-9.225,14.85]);if(SAT.cOpen){R.push([-1.237,-14.85,1.237,-12.15]);R.push([-21.825,-35.1,21.825,-14.288])}
+const SYOB=[[2.1,-0.45,15,9],[-15,-8.475,-10.8,-8.325],[-15,-3.825,-10.8,-3.675],[-15,0.825,-10.8,0.975],[-10.875,-8.4,-10.725,-6.9],[-10.875,-5.4,-10.725,-3.675],[-10.875,-3.825,-10.725,-2.1],[-10.875,-0.6,-10.725,0.975],[-6.375,8.025,1.575,9],[-15,2.4,-14.25,7.8]];
+function satYClamp(p){const R=[[-17.6,9.45,2.5,17.55],[-14.55,-8.55,14.55,8.55]];if(SAT.gOpen)R.push([-8.85,8.1,-6.15,9.9]);if(SAT.cOpen){R.push([-0.825,-9.9,0.825,-8.1]);R.push([-14.55,-23.4,14.55,-9.525])}
  let bd=1e9,bx=p.x,bz=p.z;for(const r of R){const cx=cl(p.x,r[0],r[2]),cz=cl(p.z,r[1],r[3]),d=(cx-p.x)**2+(cz-p.z)**2;if(d<bd){bd=d;bx=cx;bz=cz}}p.x=bx;p.z=bz;
- if(p.z>-13.95&&p.z<13.95)for(const o of SYOB){const m=.26,x0=o[0]-m,x1=o[2]+m,z0=o[1]-m,z1=o[3]+m;if(p.x>x0&&p.x<x1&&p.z>z0&&p.z<z1){const d=[p.x-x0,x1-p.x,p.z-z0,z1-p.z],mn=Math.min(...d),ix=d.indexOf(mn);if(ix===0)p.x=x0;else if(ix===1)p.x=x1;else if(ix===2)p.z=z0;else p.z=z1}}
- for(const o of [[21.15,-12.15,.5],[-21.15,12.15,.45],[-8.775,12.375,.4],[9.45,-12.375,.45],[-19.125,21.375,.45],[-3.375,21.375,.45]]){const dx=p.x-o[0],dz=p.z-o[1],d=Math.hypot(dx,dz);if(d<o[2]&&d>1e-4){p.x=o[0]+dx/d*o[2];p.z=o[1]+dz/d*o[2]}}}
-const satInRoom=p=>p.x<-16.2&&p.z>-12.6&&p.z<1.35;
+ if(p.z>-9.3&&p.z<9.3)for(const o of SYOB){const m=.26,x0=o[0]-m,x1=o[2]+m,z0=o[1]-m,z1=o[3]+m;if(p.x>x0&&p.x<x1&&p.z>z0&&p.z<z1){const d=[p.x-x0,x1-p.x,p.z-z0,z1-p.z],mn=Math.min(...d),ix=d.indexOf(mn);if(ix===0)p.x=x0;else if(ix===1)p.x=x1;else if(ix===2)p.z=z0;else p.z=z1}}
+ for(const o of [[14.1,-8.1,.5],[-14.1,8.1,.45],[-5.85,8.25,.4],[6.3,-8.25,.45],[-16.95,17.1,.45],[1.95,17.1,.45],[1.95,9.9,.42],[-17.1,12.4,.75],[-17.1,13.3,.75],[-17.1,14.9,.75],[-17.1,15.8,.75]]){const dx=p.x-o[0],dz=p.z-o[1],d=Math.hypot(dx,dz);if(d<o[2]&&d>1e-4){p.x=o[0]+dx/d*o[2];p.z=o[1]+dz/d*o[2]}}}
+const satInRoom=p=>p.x<-10.8&&p.z>-8.4&&p.z<.9;
 
 /* ---------- people for Saturday (made once, the first time) ---------- */
 /* Kiwi's classmates wear the same peach leotard, tutu, white tights and big bow */
@@ -3826,23 +3827,23 @@ function satUpdW(dt){satHTick(dt);const t=SW.t+=dt,T_=SW.tools,mt=t-1.4;girl.mv=
  if(mt>14.2&&!SW.out){SW.out=1;satCap('');fade(()=>{SW.out=0;SAT.cin=null;satBackC()})}}
 
 /* ---------- 4. the ballet school ---------- */
-const MAMAS=[[-20.25,2.7],[19.35,-10.8],[-7.65,10.575],[-17.1,19.8],[-4.5,19.35],[10.35,-9.9],[-12.9,-11.4],[-1.8,3.15],[-12.6,6.3],[14.4,-3.6]];
-const SCSP={'希茵':-5.4,'Chloe':-2.7,'Rochelle':0,'K':2.7,'馬梓如':5.4},SYZ=-23.4,SYR=[-9.225,-2.025];
+const MAMAS=[[-13.5,1.8],[12.9,-7.2],[-5.1,7.05],[-11.4,13.2],[-3,12.9],[6.9,-6.6],[-8.6,-7.6],[-1.2,2.1],[-8.4,4.2],[9.6,-2.4]];
+const SCSP={'希茵':-3.6,'Chloe':-1.8,'Rochelle':0,'K':1.8,'馬梓如':3.6},SYZ=-15.6,SYR=[-6.15,-1.35];
 function satAllKids(){return [...SY.cls,...SY.big]}
 function satEnterY(){SAT.yAsk=0;SAT.tOut=0;SAT.kIn=0;SAT.wantHi=0;SAT.wantBye=0;SAT.mHint=0;SAT.d=null;SAT.cin=null;SAT.roomZ=null;SAT.tR=0;SAT.rHint=0;SAT.roHi=0;SAT.sitOk=0;show('Y');GY.add(girl.g);GY.add(papa.g);satReset(girl);satReset(papa);arrow.visible=true;girl.noSep=papa.noSep=0;SAT.carry=null;
- girl.pos.set(-12.15,0,24.75);girl.yaw=Math.PI;girl.g.rotation.y=Math.PI;papa.pos.set(-10.238,0,25.312);papa.yaw=Math.PI;papa.g.rotation.y=Math.PI;
+ girl.pos.set(-8.1,0,19.5);girl.yaw=Math.PI;girl.g.rotation.y=Math.PI;papa.pos.set(-6.825,0,19.875);papa.yaw=Math.PI;papa.g.rotation.y=Math.PI;
  SAT.liftOpen=false;SAT.gOpen=false;SAT.cOpen=false;SY.liftL.forEach(d=>d.position.x=d.userData.x0);SY.gL.forEach(g=>g.position.x=g.userData.x0);SY.cL.rotation.y=0;
- SY.mama.g.visible=false;satReset(SY.tea);SY.tea.g.visible=false;SY.tea.pos.set(0,0,-20.25);
- [[11.25,2.588,Math.PI],[17.1,2.588,Math.PI],[6.975,7.65,-Math.PI/2]].forEach((a,i)=>{const e=SY.staff[i];satReset(e);e.pos.set(a[0],0,a[1]);e.yaw=a[2];e.g.rotation.y=a[2]});
- const sp=[[-3.375,-5.4],[-8.1,-0.45],[5.625,-4.95],[-0.9,4.05],[-11.7,5.85],[10.8,-8.1],[-6.3,-9.45]];satAllKids().forEach((e,i)=>{satReset(e);e.pos.set(sp[i][0],0,sp[i][1]);e.yaw=rnd()*TAU;e.g.rotation.y=e.yaw;e.wT=1+rnd()*5;e.inQ=0;e.cls=0;e.lock=0});
- const pp=[[-14.85,8.1,0],[0.9,12.645,1],[-19.35,9.9,0]];SY.par.forEach((e,i)=>{satReset(e);e.pos.set(pp[i][0],0,pp[i][1]);e.yaw=Math.PI;e.g.rotation.y=Math.PI;if(pp[i][2]){e.sit=true;e.pos.y=.42+.12-.5*e.g.scale.x}});
+ SY.mama.g.visible=false;satReset(SY.tea);SY.tea.g.visible=false;SY.tea.pos.set(0,0,-13.5);
+ [[7.5,1.725,Math.PI],[11.4,1.725,Math.PI],[4.65,5.1,-Math.PI/2]].forEach((a,i)=>{const e=SY.staff[i];satReset(e);e.pos.set(a[0],0,a[1]);e.yaw=a[2];e.g.rotation.y=a[2]});
+ const sp=[[-2.25,-3.6],[-5.4,-0.3],[3.75,-3.3],[-0.6,2.7],[-7.8,3.9],[7.2,-5.4],[-4.2,-6.3]];satAllKids().forEach((e,i)=>{satReset(e);e.pos.set(sp[i][0],0,sp[i][1]);e.yaw=rnd()*TAU;e.g.rotation.y=e.yaw;e.wT=1+rnd()*5;e.inQ=0;e.cls=0;e.lock=0});
+ const pp=[[-9.9,5.4,0],[0.6,8.43,1],[-12.9,6.6,0]];SY.par.forEach((e,i)=>{satReset(e);e.pos.set(pp[i][0],0,pp[i][1]);e.yaw=Math.PI;e.g.rotation.y=Math.PI;if(pp[i][2]){e.sit=true;e.pos.y=.42+.12-.5*e.g.scale.x}});
  try{SAT.lastMama=+localStorage.getItem('satMama')}catch(e){}
- fxParent(GY);GY.add(CRY.sm.s);SAT.t=0;SAT.cp=null;yaw=0.3;pitch=.5;dist=11;snap=1;go('sat_y0');
+ fxParent(GY);GY.add(CRY.sm.s);SAT.t=0;SAT.cp=null;yaw=0.3;pitch=.55;dist=11;snap=1;go('sat_y0');
  satSay(papa,'Papa','We are at the ballet school! Look, the lift door is opening.',4);toast('🩰 Ballet school, 8th floor');
- setTimeout(()=>{SAT.liftOpen=true;beep2()},900);setTimeout(()=>{girl.wp=[V(-11.925,0,21.15),V(-11.475,0,18.9)];papa.wp=[V(-9.9,0,21.15),V(-9,0,19.8)]},2000)}
+ setTimeout(()=>{SAT.liftOpen=true;beep2()},900);setTimeout(()=>{girl.wp=[V(-7.95,0,17.1),V(-7.65,0,14.2)];papa.wp=[V(-6.6,0,17.1),V(-5.6,0,14.8)]},2000)}
 function satYStudents(dt){satAllKids().forEach((e,i)=>{if(!e.g.visible)return;if(e.wp&&e.wp.length){follow(e,dt,e.inQ?1.8:1.3);return}e.mv=0;if(e.inQ||e.cls||e.lock||e.sit)return;
- e.wT-=dt;if(e.wT<=0){e.wT=4+rnd()*6;const r=rnd();if(r<.55){const q={x:cl(e.pos.x+(rnd()-.5)*9,-14,18.5),z:cl(e.pos.z+(rnd()-.5)*8,-11.4,10.2)};satYClamp(q);if(q.x<-15.6||q.z>10.8)return;e.wp=[V(q.x,0,q.z)]}else if(r<.75){e.pose='b5';setTimeout(()=>{if(e.pose==='b5')e.pose=null},1800)}else{const o=satAllKids()[(i+1)%7];faceTo(e,o.pos.x,o.pos.z);e.waveT=1}}})}
-function satRoomNear(){for(const z of SYR)if(Math.hypot(girl.pos.x+15.1,girl.pos.z-z)<1.9)return z;return null}
+ e.wT-=dt;if(e.wT<=0){e.wT=4+rnd()*6;const r=rnd();if(r<.55){const q={x:cl(e.pos.x+(rnd()-.5)*7,-9.5,12.5),z:cl(e.pos.z+(rnd()-.5)*6,-7.6,6.8)};satYClamp(q);if(q.x<-10.4||q.z>7.2)return;e.wp=[V(q.x,0,q.z)]}else if(r<.75){e.pose='b5';setTimeout(()=>{if(e.pose==='b5')e.pose=null},1800)}else{const o=satAllKids()[(i+1)%7];faceTo(e,o.pos.x,o.pos.z);e.waveT=1}}})}
+function satRoomNear(){for(const z of SYR)if(Math.hypot(girl.pos.x+10.1,girl.pos.z-z)<1.4)return z;return null}
 function satUpdY(dt){satYDoors(dt);tickFXP(dt);if(OFX.on)tickOFX(dt);tickTears(dt);satHTick(dt);if(SATR.visible)SATR.scale.setScalar((1+Math.sin(time*4)*.1)*.8);SAT.t+=dt;
  [papa,SY.tea,SY.mama,...SY.par].forEach(e=>{if(e.g.visible&&e.wp&&e.wp.length)follow(e,dt,e===papa?2.4:1.8)});
  if(girl.wp&&girl.wp.length){follow(girl,dt,2.0)}if(SAT.carry)satCarry(SAT.carry,dt);
@@ -3851,15 +3852,15 @@ function satUpdY(dt){satYDoors(dt);tickFXP(dt);if(OFX.on)tickOFX(dt);tickTears(d
  SY.staff.forEach((e,i)=>{e.mv=0;if(Math.hypot(girl.pos.x-e.pos.x,girl.pos.z-e.pos.z)<5)faceTo(e,girl.pos.x,girl.pos.z);else e.yaw=[Math.PI,Math.PI,-Math.PI/2][i];e.pose=(i===1&&(time%9)<5)?'type':e.pose==='type'?null:e.pose});
  if(HST.over)return;if(CRY.on){tickCry(dt);return}if(HST.ask){girl.mv=0;return}
  const P=phase;
- if(P==='sat_y0'){if(!SAT.cin)SAT.cin={p:V(-6.9,2.4,15),l:V(-11.25,1.1,23.1),f:60};if(!(girl.wp&&girl.wp.length)&&SAT.t>3.4){SAT.cin=null;yaw=0.25;pitch=.5;dist=11;snap=1;go('sat_y1');satRing(-11.25,15.075);satSay(papa,'Papa','Walk to the ballet school entrance, Kiwi. The glass doors with the red sign!',4.5)}}
- else if(P==='sat_y1'){freeMove(dt);followG(papa,dt,1.0,1.4);if(girl.pos.z<15.9&&Math.abs(girl.pos.x+11.25)<2.0){satRingOff();SAT.gOpen=true;go('sat_y1b');SAT.tR=0;papa.waveT=1.2;satSay(papa,'Papa','Let\'s go in together! Can you find the changing room? It is at the end of the reception.',5);toast('Papa follows Kiwi inside. Find the changing room at the end of the reception!')}}
- else if(P==='sat_y1b'){freeMove(dt);followG(papa,dt,1.0,1.5);SAT.tR+=dt;
-  if(SAT.tR>22&&!SAT.rHint){SAT.rHint=1;satRing(-14.85,SYR[0]);satSay(papa,'Papa','Look, Kiwi! The changing rooms are over there, with the red signs.',4)}
-  const z=satRoomNear();if(z!==null&&!SAT.yAsk){SAT.yAsk=1;satRingOff();girl.mv=0;SAT.roomZ=z;papa.wp=[V(-13.2,0,z+1.6)];papa.done=e=>{e.mv=0;faceTo(e,girl.pos.x,girl.pos.z)};faceTo(girl,-13.5,z+1.6);
-   satAsk(papa,'Papa','You found the changing room! Kiwi, are you ready to have your ballet lesson?','Yes Papa, I am ready!','No, I don\'t want ballet',()=>{go('sat_y2');SAT.chg=0;girl.wp=[V(-15.6,0,z),V(-19.05,0,z)];girl.done=e=>{e.mv=0;faceTo(e,-15.6,z);SAT.chg=1;OFX.pend='bal';startOFX()};toast('Kiwi goes into the changing room to put on her ballet clothes.')})}}
+ if(P==='sat_y0'){if(!SAT.cin)SAT.cin={p:V(-1.2,3.4,10.4),l:V(-7.5,1.1,18.0),f:62};if(!(girl.wp&&girl.wp.length)&&SAT.t>3.4){SAT.cin=null;yaw=0.25;pitch=.55;dist=11;snap=1;go('sat_y1');satRing(-7.5,10.05);satSay(papa,'Papa','Walk to the ballet school entrance, Kiwi. The glass doors with the red sign!',4.5)}}
+ else if(P==='sat_y1'){freeMove(dt);followG(papa,dt,2.2,.8);if(girl.pos.z<10.6&&Math.abs(girl.pos.x+7.5)<1.6){satRingOff();SAT.gOpen=true;go('sat_y1b');SAT.tR=0;papa.waveT=1.2;satSay(papa,'Papa','Let\'s go in together! Can you find the changing room? It is at the end of the reception.',5);toast('Papa follows Kiwi inside. Find the changing room at the end of the reception!')}}
+ else if(P==='sat_y1b'){freeMove(dt);followG(papa,dt,2.2,.9);SAT.tR+=dt;
+  if(SAT.tR>22&&!SAT.rHint){SAT.rHint=1;satRing(-9.9,SYR[0]);satSay(papa,'Papa','Look, Kiwi! The changing rooms are over there, with the red signs.',4)}
+  const z=satRoomNear();if(z!==null&&!SAT.yAsk){SAT.yAsk=1;satRingOff();girl.mv=0;SAT.roomZ=z;papa.wp=[V(-8.8,0,z+1.2)];papa.done=e=>{e.mv=0;faceTo(e,girl.pos.x,girl.pos.z)};faceTo(girl,-9,z+1.4);
+   satAsk(papa,'Papa','You found the changing room! Kiwi, are you ready to have your ballet lesson?','Yes Papa, I am ready!','No, I don\'t want ballet',()=>{go('sat_y2');SAT.chg=0;girl.wp=[V(-10.4,0,z),V(-12.7,0,z)];girl.done=e=>{e.mv=0;faceTo(e,-10.4,z);SAT.chg=1;OFX.pend='bal';startOFX()};toast('Kiwi goes into the changing room to put on her ballet clothes.')})}}
  else if(P==='sat_y2'){if(!(girl.wp&&girl.wp.length))girl.mv=0;faceTo(papa,girl.pos.x,girl.pos.z);
-  if(SAT.chg===1&&!OFX.on&&!OFX.pend){SAT.chg=2;const z=SAT.roomZ;girl.wp=[V(-15.6,0,z),V(-13.5,0,z+.6)];girl.done=e=>{e.mv=0;go('sat_y3');SAT.t3=0;papa.waveT=1.4;satSay(papa,'Papa','Wow! My little ballerina! Go and play in the reception. Papa will sit on the bench.',5);toast('Walk around the reception. Say hello to your classmates and the other ballet students!');
-   papa.wp=[V(-9.45,0,9.9),V(-3.6,0,11.25)];papa.done=p2=>{p2.sit=true;p2.pos.set(-3.6,.42+.12-.5*p2.g.scale.x,12.645);p2.yaw=Math.PI;p2.g.rotation.y=Math.PI}}}}
+  if(SAT.chg===1&&!OFX.on&&!OFX.pend){SAT.chg=2;const z=SAT.roomZ;girl.wp=[V(-10.4,0,z),V(-9.0,0,z+.4)];girl.done=e=>{e.mv=0;go('sat_y3');SAT.t3=0;papa.waveT=1.4;satSay(papa,'Papa','Wow! My little ballerina! Go and play in the reception. Papa will sit on the bench.',5);toast('Walk around the reception. Say hello to your classmates and the other ballet students!');
+   papa.wp=[V(-6.3,0,6.6),V(-2.4,0,7.5)];papa.done=p2=>{p2.sit=true;p2.pos.set(-2.4,.42+.12-.5*p2.g.scale.x,8.43);p2.yaw=Math.PI;p2.g.rotation.y=Math.PI}}}}
  else if(P==='sat_y3'){freeMove(dt);SAT.t3+=dt;const ro=SY.cls[0];if(!SAT.roHi&&satNear(ro,2.6)){SAT.roHi=1;ro.wp=null;faceTo(ro,girl.pos.x,girl.pos.z);ro.waveT=2.4;ro.w2=1;satSay(ro,'Rochelle','Kiwi! Kiwi! My best friend! We have the same ballet dress!',4);satHearts(ro,6,1.4);rw1('rochelle','Kiwi met her best friend Rochelle!')}
   if(SAT.t3>24&&!SAT.tOut){SAT.tOut=1;satClassReady()}}
  else if(P==='sat_y4'){satQueue(dt)}
@@ -3870,33 +3871,33 @@ function satUpdY(dt){satYDoors(dt);tickFXP(dt);if(OFX.on)tickOFX(dt);tickTears(d
   if(SAT.t7>3&&!(m.waveT>0)&&(SAT.t7%7)<.05){m.waveT=1.2}}
  else if(P==='sat_y8'){girl.mv=0}}
 /* Ms Wan: "It's ready for class!" and Kiwi's class lines up outside the studio door */
-function satQSlot(i){return V(.25+i*1.05,0,-11.4)}
-function satClassReady(){const T_=SY.tea;T_.g.visible=true;T_.pos.set(0,0,-19.35);SAT.cOpen=true;T_.wp=[V(-2.138,0,-15.3)];T_.done=e=>{e.mv=0;faceTo(e,.6,-12.15);satSay(e,'Ms Wan','It\'s ready for class! Baby Ballet class, please line up outside the door.',4.5);e.waveT=1.6;
-  SAT.q=[1,0,'K',2,3];SAT.q.forEach((s,i)=>{if(s==='K')return;const st=SY.cls[s];st.inQ=1;st.lock=1;st.pose=null;st.sit=false;st.wp=[satQSlot(i)];st.done=e2=>{e2.mv=0;faceTo(e2,0,-13.95)}});
+function satQSlot(i){return V(.15+i*1.0,0,-7.6)}
+function satClassReady(){const T_=SY.tea;T_.g.visible=true;T_.pos.set(0,0,-12.9);SAT.cOpen=true;T_.wp=[V(-1.425,0,-10.2)];T_.done=e=>{e.mv=0;faceTo(e,.4,-8.1);satSay(e,'Ms Wan','It\'s ready for class! Baby Ballet class, please line up outside the door.',4.5);e.waveT=1.6;
+  SAT.q=[1,0,'K',2,3];SAT.q.forEach((s,i)=>{if(s==='K')return;const st=SY.cls[s];st.inQ=1;st.lock=1;st.pose=null;st.sit=false;st.wp=[satQSlot(i)];st.done=e2=>{e2.mv=0;faceTo(e2,0,-9.3)}});
   satRing(satQSlot(2).x,satQSlot(2).z);go('sat_y4');SAT.qT=0;SAT.kIn=0;SAT.wantHi=0;toast('Line up outside the studio door: walk to the yellow ring, behind Rochelle!')}}
 function satQueue(dt){const K=SAT.q.indexOf('K');
- if(!SAT.kIn){freeMove(dt);const s=satQSlot(K);if(Math.hypot(girl.pos.x-s.x,girl.pos.z-s.z)<.75){SAT.kIn=1;satRingOff();girl.wp=[s.clone()];girl.done=e=>{faceTo(e,0,-13.95)};SAT.qT=1.2}return}
+ if(!SAT.kIn){freeMove(dt);const s=satQSlot(K);if(Math.hypot(girl.pos.x-s.x,girl.pos.z-s.z)<.75){SAT.kIn=1;satRingOff();girl.wp=[s.clone()];girl.done=e=>{faceTo(e,0,-9.3)};SAT.qT=1.2}return}
  if(girl.wp&&girl.wp.length)return;girl.mv=0;if(SAT.wantHi)return;
  SAT.qT-=dt;if(SAT.qT>0)return;if(SAT.q[0]==='K'){SAT.wantHi=1;return}
  const s=SAT.q.shift();if(s===undefined)return;const st=SY.cls[s];satSay(st,st.nm,'Good morning, Ms Wan!',2);st.waveT=1;st.inQ=0;st.cls=1;satSitGo(st,SCSP[st.nm]);
- setTimeout(()=>{SY.tea.waveT=.8},300);SAT.q.forEach((x,i)=>{const p=satQSlot(i);if(x==='K'){girl.wp=[p];girl.done=e=>faceTo(e,0,-13.95)}else{const o=SY.cls[x];o.wp=[p];o.done=e=>{e.mv=0;faceTo(e,0,-13.95)}}});SAT.qT=1.7}
+ setTimeout(()=>{SY.tea.waveT=.8},300);SAT.q.forEach((x,i)=>{const p=satQSlot(i);if(x==='K'){girl.wp=[p];girl.done=e=>faceTo(e,0,-9.3)}else{const o=SY.cls[x];o.wp=[p];o.done=e=>{e.mv=0;faceTo(e,0,-9.3)}}});SAT.qT=1.7}
 /* a classmate walks into the studio and sits down nicely on her mat */
-function satSitGo(e,x){e.wp=[V(0,0,-13.5),V(0,0,-16.65),V(x,0,SYZ)];e.done=f=>{f.mv=0;f.sit=true;f.pos.y=.012+.12-.5*f.g.scale.x;f.yaw=Math.PI;f.g.rotation.y=Math.PI}}
+function satSitGo(e,x){e.wp=[V(0,0,-9),V(0,0,-11.1),V(x,0,SYZ)];e.done=f=>{f.mv=0;f.sit=true;f.pos.y=.012+.12-.5*f.g.scale.x;f.yaw=Math.PI;f.g.rotation.y=Math.PI}}
 function satHiTeacher(){SAT.wantHi=0;SAT.q.shift();girl.waveT=2;faceTo(girl,SY.tea.pos.x,SY.tea.pos.z);SY.tea.waveT=2.2;sayE=SY.tea;sayT=4.6;$('say').innerHTML='<b>Kiwi</b>: Good morning, Ms Wan!<br><b>Ms Wan</b>: Good morning Kiwi! What a pretty ballerina. Come in and sit down nicely on your mat.';rw2('balHi','Kiwi greeted Ms Wan!');
- setTimeout(()=>{SY.tea.wp=[V(0,0,-27.9)];SY.tea.done=e=>{e.mv=0;e.yaw=0;e.g.rotation.y=0};go('sat_y4b');SAT.sitOk=0;satRing(SCSP.K,SYZ);toast('Go into the studio and sit down nicely on your mat next to Rochelle (yellow ring).');
+ setTimeout(()=>{SY.tea.wp=[V(0,0,-18.6)];SY.tea.done=e=>{e.mv=0;e.yaw=0;e.g.rotation.y=0};go('sat_y4b');SAT.sitOk=0;satRing(SCSP.K,SYZ);toast('Go into the studio and sit down nicely on your mat next to Rochelle (yellow ring).');
   SAT.q.forEach((x,i)=>{const o=SY.cls[x];setTimeout(()=>{o.inQ=0;o.cls=1;satSitGo(o,SCSP[o.nm])},700+i*700)})},1600)}
 function satSitDown(){SAT.sitOk=1;satRingOff();girl.wp=null;girl.mv=0;girl.pos.set(SCSP.K,.012+.12-.5*girl.g.scale.x,SYZ);girl.sit=true;girl.yaw=Math.PI;girl.g.rotation.y=Math.PI;rw2('sitNice','Kiwi sat down nicely with her classmates!');
  const ro=SY.cls[0];setTimeout(()=>{satSay(ro,'Rochelle','Yay! Kiwi is sitting next to me!',3);satHeart(ro.pos.x,1.0,ro.pos.z,1)},600);
- SAT.cin={p:V(3.6,1.7,-30.6),l:V(0.9,.5,-23.175),f:56};SAT.cp=null;
+ SAT.cin={p:V(2.4,1.7,-20.4),l:V(0.6,.5,-15.45),f:56};SAT.cp=null;
  setTimeout(()=>{satSay(SY.tea,'Ms Wan','Good morning, class! You are all sitting so nicely. Today we will dance like little swans. Stand up, let\'s dance!',5);SY.tea.waveT=2},2400);
  setTimeout(()=>fade(satDanceStart),7600)}
 /* the dance class: a happy, sparkly ballet (about 12 seconds) */
-const SDP={rows:[[0,-26.1],[-4.05,-26.1],[4.05,-26.1],[-2.025,-22.5],[2.025,-22.5]],moves:[[0,'b1','Pliés: bend your knees softly!'],[2.4,'b5','Relevé: up on your toes, arms up high!'],[4.8,'tw','Twirl like a little princess!'],[7.2,'barab','Arabesque: stretch one leg back!'],[9.6,'jmp','Little jumps: sauté, sauté!'],[12,'curtsy','Révérence: thank you, Ms Wan!']]};
+const SDP={rows:[[0,-17.4],[-2.7,-17.4],[2.7,-17.4],[-1.35,-15],[1.35,-15]],moves:[[0,'b1','Pliés: bend your knees softly!'],[2.4,'b5','Relevé: up on your toes, arms up high!'],[4.8,'tw','Twirl like a little princess!'],[7.2,'barab','Arabesque: stretch one leg back!'],[9.6,'jmp','Little jumps: sauté, sauté!'],[12,'curtsy','Révérence: thank you, Ms Wan!']]};
 function satDanceStart(){SAT.d={t:0,mi:-1};SAT.q=[];papa.g.visible=false;
  const all=[girl,...SY.cls];all.forEach((e,i)=>{if(e!==girl)satReset(e);else{e.wp=null;e.mv=0;e.pose=null;e.sit=false}e.cls=1;e.inQ=0;e.lock=1;const p=SDP.rows[i];e.pos.set(p[0],0,p[1]);e.yaw=Math.PI;e.g.rotation.y=Math.PI;e.d0=i*.12});
- SY.big.forEach(e=>{if(e.pos.z<-13.5)e.pos.set(6.75,0,-10.125)});
- SY.tea.g.visible=true;satReset(SY.tea);SY.tea.pos.set(-9,0,-30.15);faceTo(SY.tea,0,-24.3);SY.tea.ty=SY.tea.yaw;
- SAT.cin={p:V(0.675,2.25,-34.875),l:V(0,.9,-23.85),f:56};SAT.cp=null;go('sat_y5');satCap('🩰 Ballet class with Ms Wan');satWaltz();satSay(SY.tea,'Ms Wan','Follow me, little swans! One, two, three!',3.4)}
+ SY.big.forEach(e=>{if(e.pos.z<-9)e.pos.set(4.5,0,-6.75)});
+ SY.tea.g.visible=true;satReset(SY.tea);SY.tea.pos.set(-6,0,-20.1);faceTo(SY.tea,0,-16.2);SY.tea.ty=SY.tea.yaw;
+ SAT.cin={p:V(0.45,2.25,-23.25),l:V(0,.9,-15.9),f:56};SAT.cp=null;go('sat_y5');satCap('🩰 Ballet class with Ms Wan');satWaltz();satSay(SY.tea,'Ms Wan','Follow me, little swans! One, two, three!',3.4)}
 function satDance(dt){const D=SAT.d,t=D.t+=dt,all=[girl,...SY.cls,SY.tea];
  let mi=0;SDP.moves.forEach((m,i)=>{if(t>=m[0])mi=i});if(mi!==D.mi){D.mi=mi;const m=SDP.moves[mi];satCap('🩰 '+m[2]);if(mi%2===0||mi===5)satSay(SY.tea,'Ms Wan',m[2],2.3)}
  const mv=SDP.moves[mi][1],lt=t-SDP.moves[mi][0];
@@ -3910,27 +3911,27 @@ function satDance(dt){const D=SAT.d,t=D.t+=dt,all=[girl,...SY.cls,SY.tea];
   e.pos.y=y;e.yaw=yw;e.g.rotation.y=yw});
  if(rnd()<dt*14){const e=all[(rnd()*all.length)|0];fxEmit(e.pos.x+(rnd()-.5)*.8,.6+rnd()*1.6,e.pos.z+(rnd()-.5)*.8,(rnd()-.5)*.4,.4,(rnd()-.5)*.4,1.4,.16+rnd()*.12,-.2)}
  if(rnd()<dt*2)satHeart(girl.pos.x+(rnd()-.5)*.4,1.7,girl.pos.z,0);
- const C=SAT.cin,sw=Math.sin(t*.32);if(mv==='tw'){C.p.set(sw*.8,1.6,-29.0);C.l.set(0,.85,-26.1);C.f=54}else if(mv==='curtsy'){C.p.set(-1.4,2.6,-32.6);C.l.set(-.1,.85,-24.8);C.f=60}else{C.p.set(.4+sw*2,2.8,-32.6);C.l.set(sw*.4,.9,-24.4);C.f=58}
+ const C=SAT.cin,sw=Math.sin(t*.32);if(mv==='tw'){C.p.set(sw*.8,1.6,-20.2);C.l.set(0,.85,-17.4);C.f=54}else if(mv==='curtsy'){C.p.set(-1.4,2.4,-23.2);C.l.set(-.1,.85,-16.4);C.f=60}else{C.p.set(.4+sw*2,2.6,-23.2);C.l.set(sw*.4,.9,-16);C.f=58}
  if(t>13.6&&!D.end){D.end=1;rw2('ballet','Kiwi danced beautifully in ballet class!');satHearts(girl,10,1.4);satCap('');setTimeout(()=>fade(satExitStart),1600)}}
 function satWaltz(){if(!AU.ctx||!AU.mus)return;try{const c=AU.ctx,t0=c.currentTime+.1,b=.43;SAT.wz=1;setTimeout(()=>{SAT.wz=0},14500);
  const mel=[76,79,84, 83,79,76, 77,81,86, 84,81,77, 76,79,84, 83,86,91, 89,86,83, 84,0,0, 72,76,79, 81,84,88, 86,83,79, 84,0,0];
  const bs=[48,43,41,41,48,43,43,48,48,45,43,48];
  mel.forEach((m,i)=>{if(m)tone(m,t0+i*b,b*1.4,.075,'bell')});bs.forEach((m,i)=>{const t=t0+i*3*b;tone(m,t,b*1.6,.12,'bass');const ch=[[60,64,67],[59,62,67],[57,60,65],[57,60,65],[60,64,67],[59,62,67],[59,62,67],[60,64,67],[60,64,67],[57,60,64],[59,62,67],[60,64,67]][i];[1,2].forEach(k=>ch.forEach(n=>tone(n,t+k*b,b*.7,.025,'pluck')))})}catch(e){}}
 /* end of class: out one by one, curtsy and thank Ms Wan */
-function satExitStart(){SAT.cin=null;SAT.cp=null;const T_=SY.tea;satReset(T_);T_.pos.set(-2.588,0,-15.188);T_.yaw=Math.PI/2;T_.g.rotation.y=T_.yaw;SY.par.forEach(e=>e.g.visible=true);
- SAT.q=[1,0,'K',2,3];SAT.q.forEach((x,i)=>{const e=x==='K'?girl:SY.cls[x];if(e!==girl)satReset(e);else{e.pose=null;e.wp=null;e.lean=0;e.sit=false}e.pos.set(1.2+i*1.0,0,-16.8);e.yaw=-Math.PI/2;e.g.rotation.y=e.yaw;e.cls=1;e.lock=1;e.pos.y=0});
- yaw=Math.PI*.15;pitch=.5;dist=10;snap=1;go('sat_y6');SAT.xT=1.4;SAT.wantBye=0;satSay(T_,'Ms Wan','Well done, everyone! Come out one by one, and say goodbye.',4);toast('Wait for your turn at the door, then curtsy and say thank you!')}
-const SEX=[[6.75,-7.65],[-5.4,-6.75],[-9.9,-2.7],[-2.25,5.85],[1.35,-3.15]];
+function satExitStart(){SAT.cin=null;SAT.cp=null;const T_=SY.tea;satReset(T_);T_.pos.set(-1.725,0,-10.125);T_.yaw=Math.PI/2;T_.g.rotation.y=T_.yaw;SY.par.forEach(e=>e.g.visible=true);
+ SAT.q=[1,0,'K',2,3];SAT.q.forEach((x,i)=>{const e=x==='K'?girl:SY.cls[x];if(e!==girl)satReset(e);else{e.pose=null;e.wp=null;e.lean=0;e.sit=false}e.pos.set(1.0+i*1.0,0,-11.2);e.yaw=-Math.PI/2;e.g.rotation.y=e.yaw;e.cls=1;e.lock=1;e.pos.y=0});
+ yaw=Math.PI*.15;pitch=.55;dist=10;snap=1;go('sat_y6');SAT.xT=1.4;SAT.wantBye=0;satSay(T_,'Ms Wan','Well done, everyone! Come out one by one, and say goodbye.',4);toast('Wait for your turn at the door, then curtsy and say thank you!')}
+const SEX=[[4.5,-5.1],[-3.6,-4.5],[-6.6,-1.8],[-1.5,3.9],[0.9,-2.1]];
 function satExit(dt){if(girl.wp&&girl.wp.length)return;if(SAT.wantBye)return;
  SAT.xT-=dt;if(SAT.xT>0)return;const x=SAT.q[0];if(x===undefined)return;
- if(x==='K'){SAT.wantBye=1;girl.wp=[V(0,0,-15.413)];girl.done=e=>{faceTo(e,SY.tea.pos.x,SY.tea.pos.z)};return}
- SAT.q.shift();const st=SY.cls[x];st.wp=[V(0,0,-15.413)];st.done=e=>{faceTo(e,SY.tea.pos.x,SY.tea.pos.z);e.pose='curtsy';satSay(e,e.nm,'Thank you, Ms Wan! Bye bye!',1.8);SY.tea.waveT=1;setTimeout(()=>{e.pose=null;e.inQ=0;e.cls=0;e.lock=0;const q=SEX[x%SEX.length];e.wp=[V(0,0,-11.7),V(q[0],0,q[1])];e.done=f=>{f.mv=0}},1100)};
- SAT.q.forEach((y,i)=>{const e=y==='K'?girl:SY.cls[y];e.wp=[V(1.2+i*1.0,0,-16.8)];e.done=f=>{f.mv=0;f.yaw=-Math.PI/2}});SAT.xT=2.6}
-function satCurtsy(){SAT.wantBye=0;SAT.q.shift();SAT.cin={p:V(3.375,1.8,-8.325),l:V(-0.225,.8,-15.3),f:52};SAT.cp=null;setTimeout(()=>{if(phase==='sat_y6'||phase==='sat_y7'){SAT.cin=null;snap=1}},2400);girl.pose='curtsy';faceTo(girl,SY.tea.pos.x,SY.tea.pos.z);SY.tea.waveT=2.4;sayE=SY.tea;sayT=4.8;$('say').innerHTML='<b>Kiwi</b>: Thank you, Ms Wan! Bye bye!<br><b>Ms Wan</b>: Bye bye Kiwi! Lovely curtsy! See you next Saturday.';rw2('thxT','Kiwi curtsied and thanked Ms Wan!');satHearts(girl,6,1.4);
- setTimeout(()=>{girl.pose=null;girl.wp=[V(0,0,-11.25)];girl.done=e=>{e.mv=0;satFindMama()}},1900);
- SAT.q.forEach((y,i)=>{setTimeout(()=>{const st=SY.cls[y];st.wp=[V(0,0,-15.413)];st.done=e=>{e.pose='curtsy';satSay(e,e.nm,'Thank you, Ms Wan!',1.6);setTimeout(()=>{e.pose=null;e.cls=0;e.lock=0;e.inQ=0;const q=SEX[y%SEX.length];e.wp=[V(0,0,-11.7),V(q[0],0,q[1])];e.done=f=>{f.mv=0}},1000)}},2600+i*2300)})}
+ if(x==='K'){SAT.wantBye=1;girl.wp=[V(0,0,-10.275)];girl.done=e=>{faceTo(e,SY.tea.pos.x,SY.tea.pos.z)};return}
+ SAT.q.shift();const st=SY.cls[x];st.wp=[V(0,0,-10.275)];st.done=e=>{faceTo(e,SY.tea.pos.x,SY.tea.pos.z);e.pose='curtsy';satSay(e,e.nm,'Thank you, Ms Wan! Bye bye!',1.8);SY.tea.waveT=1;setTimeout(()=>{e.pose=null;e.inQ=0;e.cls=0;e.lock=0;const q=SEX[x%SEX.length];e.wp=[V(0,0,-7.8),V(q[0],0,q[1])];e.done=f=>{f.mv=0}},1100)};
+ SAT.q.forEach((y,i)=>{const e=y==='K'?girl:SY.cls[y];e.wp=[V(1.0+i*1.0,0,-11.2)];e.done=f=>{f.mv=0;f.yaw=-Math.PI/2}});SAT.xT=2.6}
+function satCurtsy(){SAT.wantBye=0;SAT.q.shift();SAT.cin={p:V(2.25,1.8,-5.55),l:V(-0.15,.8,-10.2),f:52};SAT.cp=null;setTimeout(()=>{if(phase==='sat_y6'||phase==='sat_y7'){SAT.cin=null;snap=1}},2400);girl.pose='curtsy';faceTo(girl,SY.tea.pos.x,SY.tea.pos.z);SY.tea.waveT=2.4;sayE=SY.tea;sayT=4.8;$('say').innerHTML='<b>Kiwi</b>: Thank you, Ms Wan! Bye bye!<br><b>Ms Wan</b>: Bye bye Kiwi! Lovely curtsy! See you next Saturday.';rw2('thxT','Kiwi curtsied and thanked Ms Wan!');satHearts(girl,6,1.4);
+ setTimeout(()=>{girl.pose=null;girl.wp=[V(0,0,-7.5)];girl.done=e=>{e.mv=0;satFindMama()}},1900);
+ SAT.q.forEach((y,i)=>{setTimeout(()=>{const st=SY.cls[y];st.wp=[V(0,0,-10.275)];st.done=e=>{e.pose='curtsy';satSay(e,e.nm,'Thank you, Ms Wan!',1.6);setTimeout(()=>{e.pose=null;e.cls=0;e.lock=0;e.inQ=0;const q=SEX[y%SEX.length];e.wp=[V(0,0,-7.8),V(q[0],0,q[1])];e.done=f=>{f.mv=0}},1000)}},2600+i*2300)})}
 function satFindMama(){const m=SY.mama;satReset(m);let ix;do{ix=(rnd()*MAMAS.length)|0}while(ix===SAT.lastMama&&MAMAS.length>1);SAT.lastMama=ix;try{localStorage.setItem('satMama',ix)}catch(e){}
- const p=MAMAS[ix];m.pos.set(p[0],0,p[1]);faceTo(m,girl.pos.x,girl.pos.z);m.g.visible=true;go('sat_y7');SAT.t7=0;SAT.mHint=0;if(p[1]>13.5)SAT.gOpen=true;
+ const p=MAMAS[ix];m.pos.set(p[0],0,p[1]);faceTo(m,girl.pos.x,girl.pos.z);m.g.visible=true;go('sat_y7');SAT.t7=0;SAT.mHint=0;if(p[1]>9)SAT.gOpen=true;
  satSay(girl,'Kiwi','Where is Mama?',2.6);toast('💗 Mama has come to pick Kiwi up! She is waiting somewhere. Can you find her?')}
 function satHugMama(){const m=SY.mama;satRingOff();go('sat_y8');girl.mv=0;girl.noSep=m.noSep=1;faceTo(girl,m.pos.x,m.pos.z);const dx=m.pos.x-girl.pos.x,dz=m.pos.z-girl.pos.z,dl=Math.hypot(dx,dz)||1;m.wp=null;m.pos.set(girl.pos.x+dx/dl*.68,0,girl.pos.z+dz/dl*.68);faceTo(m,girl.pos.x,girl.pos.z);m.pose='hug';m.lean=.22;girl.pose='hug';girl.lean=-.1;
  satHearts(girl,14,1.2);rw2('hugMama','A big warm hug for Mama!');sayE=m;sayT=6;$('say').innerHTML='<b>Kiwi</b>: Mama! I found you! I danced like a ballerina!<br><b>Mama</b>: My little ballerina! I am so proud of you. I love you!';
@@ -3980,9 +3981,9 @@ function satCam(dt){if(!SAT.on)return false;
  SAT.cp=null;
  if(scene==='T'&&!HCAM.on)return satTCam(dt);
  if(scene==='N'&&!HCAM.on)return satNCam(dt);
- if(scene==='Y'&&!HCAM.on){const p=girl.pos,lk=V(p.x+off.x,1.05+off.y,p.z+off.z);pitch=Math.max(.12,Math.min(1.25,pitch));const D=Math.min(16,Math.max(2.6,dist*ZO*.95)),cp=Math.cos(pitch);
+ if(scene==='Y'&&!HCAM.on){const p=girl.pos,lk=V(p.x+off.x,1.05+off.y,p.z+off.z);pitch=Math.max(.12,Math.min(1.25,pitch));const D=Math.min(15,Math.max(2.6,dist*ZO)),cp=Math.cos(pitch);
   let cx=lk.x+Math.sin(yaw)*cp*D,cz=lk.z+Math.cos(yaw)*cp*D,cy=lk.y+Math.sin(pitch)*D;const lx=p.x,lz=p.z;
-  if(lz>13.7){cx=cl(cx,-19.8+off.x,-2.7+off.x);cz=cl(cz,13.95+off.z,22.05+off.z);cy=Math.min(cy,4.6+off.y)}else if(lz<-13.7){cx=cl(cx,-22.05+off.x,22.05+off.x);cz=cl(cz,-35.55+off.z,-13.95+off.z);cy=Math.min(cy,4.8+off.y)}else if(satInRoom(p)){const z0=lz<-5.6?-12.4:-5.4,z1=lz<-5.6?-5.85:1.1;cx=cl(cx,-22.05+off.x,-16.5+off.x);cz=cl(cz,z0+off.z,z1+off.z);cy=Math.min(cy,4.8+off.y)}else{cx=cl(cx,-22.05+off.x,22.05+off.x);cz=cl(cz,-13.05+off.z,13.05+off.z);cy=Math.min(cy,4.8+off.y)}
+  if(lz>9.15){cx=cl(cx,-17.8+off.x,2.8+off.x);cz=cl(cz,9.3+off.z,17.8+off.z);cy=Math.min(cy,4.8+off.y)}else if(lz<-9.15){cx=cl(cx,-14.7+off.x,14.7+off.x);cz=cl(cz,-23.7+off.z,-9.3+off.z);cy=Math.min(cy,4.8+off.y)}else if(satInRoom(p)){const z0=lz<-3.75?-8.25:-3.6,z1=lz<-3.75?-3.9:.75;cx=cl(cx,-14.7+off.x,-11+off.x);cz=cl(cz,z0+off.z,z1+off.z);cy=Math.min(cy,4.8+off.y)}else{cx=cl(cx,-14.7+off.x,14.7+off.x);cz=cl(cz,-8.7+off.z,8.7+off.z);cy=Math.min(cy,4.8+off.y)}
   if(!SAT.yc||snap){SAT.yc=V(cx,cy,cz);SAT.yl=lk.clone();snap=0}SAT.yc.lerp(V(cx,cy,cz),Math.min(1,dt*4));SAT.yl.lerp(lk,Math.min(1,dt*5));cam.position.copy(SAT.yc);cam.lookAt(SAT.yl);look.copy(SAT.yl);const fv=innerWidth<innerHeight?72:62;if(Math.abs(cam.fov-fv)>.05){cam.fov+=(fv-cam.fov)*Math.min(1,dt*3);cam.updateProjectionMatrix()}return true}
  return false}
 
@@ -4109,7 +4110,7 @@ function satDobok(o,belt){/* white dobok with a black collar and a belt */const 
  /* benches for parents beside the glass */
  [[-8,9.4],[-4.6,9.4],[5,9.4]].forEach(a=>{satBx(P,2.4,.08,.55,a[0],.44,a[1],M(0x8c6a42));[-1.1,1.1].forEach(q=>satBx(P,.08,.44,.5,a[0]+q,.22,a[1],M(0x2b2b2b)))});
 })();
-function satTClamp(p){const C=STK.castle,R=[[-11.5,8.6,11.5,17.4],[-2.9,7.3,2.9,8.7],[-21.4,-21.4,21.4,7.4]];let bd=1e9,bx=p.x,bz=p.z;for(const r of R){const cx=cl(p.x,r[0],r[2]),cz=cl(p.z,r[1],r[3]),d=(cx-p.x)**2+(cz-p.z)**2;if(d<bd){bd=d;bx=cx;bz=cz}}p.x=bx;p.z=bz;
+function satTClamp(p){const C=STK.castle;if(phase==='sat_t2'&&!(SAT.tk&&SAT.tk.ringOn))p.z=Math.max(p.z,8.75);const R=[[-11.5,8.6,11.5,17.4],[-2.9,7.3,2.9,8.7],[-21.4,-21.4,21.4,7.4]];let bd=1e9,bx=p.x,bz=p.z;for(const r of R){const cx=cl(p.x,r[0],r[2]),cz=cl(p.z,r[1],r[3]),d=(cx-p.x)**2+(cz-p.z)**2;if(d<bd){bd=d;bx=cx;bz=cz}}p.x=bx;p.z=bz;
  const OB=[[C.x0-.4,C.z0-.5,C.x0+.4,-11.2],[C.x0-.4,-8.8,C.x0+.4,C.z1+.5],[C.x0,C.z0-.5,C.x1+.5,C.z0+.4],[C.x0,C.z1-.4,C.x1+.5,C.z1+.5],[C.x1-.4,C.z0,C.x1+.5,C.z1],[5.8,16.2,9.2,17.4],[-9.3,8.95,-3.3,9.85],[3.8,8.95,6.2,9.85],[-9,16.1,-8,17.1]];
  for(const o of OB){const m=.2,x0=o[0]-m,x1=o[2]+m,z0=o[1]-m,z1=o[3]+m;if(p.x>x0&&p.x<x1&&p.z>z0&&p.z<z1){const d=[p.x-x0,x1-p.x,p.z-z0,z1-p.z],mn=Math.min(...d),ix=d.indexOf(mn);if(ix===0)p.x=x0;else if(ix===1)p.x=x1;else if(ix===2)p.z=z0;else p.z=z1}}}
 const satInCastle=p=>{const C=STK.castle;return p.x>C.x0+.3&&p.x<C.x1-.3&&p.z>C.z0+.3&&p.z<C.z1-.3};
@@ -4121,11 +4122,11 @@ function satTPeople(){if(STK.made)return;STK.made=1;
 function satWhistle(){if(!AU.ctx||!AU.mus)return;try{const c=AU.ctx,t0=c.currentTime+.02;[0,.28].forEach(d=>{const o=c.createOscillator(),g=c.createGain(),v=c.createOscillator(),vg=c.createGain();o.type='square';o.frequency.value=2600;v.frequency.value=45;vg.gain.value=180;v.connect(vg);vg.connect(o.frequency);g.gain.setValueAtTime(0,t0+d);g.gain.linearRampToValueAtTime(.05,t0+d+.02);g.gain.linearRampToValueAtTime(0,t0+d+.22);o.connect(g);g.connect(AU.master);o.start(t0+d);v.start(t0+d);o.stop(t0+d+.25);v.stop(t0+d+.25)})}catch(e){}}
 function satTLine(i){return V(-6+i*2.4,0,-6.2)}
 const STSL=[0,1,3,4,5];
-function satEnterT(){satTPeople();show('T');const m=SY.mama;[girl,m].forEach(e=>{GT.add(e.g);satReset(e);e.noSep=0});arrow.visible=true;SAT.carry=null;girl.sleep=false;
+function satEnterT(){satTPeople();show('T');satCap('');const m=SY.mama;[girl,m].forEach(e=>{GT.add(e.g);satReset(e);e.noSep=0});arrow.visible=true;SAT.carry=null;girl.sleep=false;
  girl.pos.set(0,0,13.2);girl.yaw=Math.PI;girl.g.rotation.y=Math.PI;m.pos.set(1.1,0,13.7);m.yaw=Math.PI;m.g.rotation.y=Math.PI;
  STK.tut.forEach((e,i)=>{satReset(e);e.pos.set([-2,4,-8][i],0,[-12,-4,-9][i]);faceTo(e,0,0)});
  STK.stu.forEach((e,i)=>{satReset(e);e.pos.set([-7,-3,5,9,-12][i],0,[-3,-10,-8,1,-14][i]);e.wT=1+rnd()*4;e.lock=0;e.bnc=0});STK.pads.forEach(p=>p.visible=false);
- fxParent(GT);GT.add(CRY.sm.s);SAT.tk={t:0,ph:0,bounce:0,line:0};SAT.cin=null;SAT.cp=null;yaw=Math.PI*0+.2;pitch=.45;dist=9;snap=1;go('sat_t0');
+ fxParent(GT);GT.add(CRY.sm.s);SAT.tk={t:0,ph:0,bounce:0,line:0};SAT.cin=null;SAT.cp=null;yaw=Math.PI*0+.2;pitch=.5;dist=12;snap=1;go('sat_t0');
  satSay(m,'Mama','Wake up, sleepy head! We are at your Taekwondo class!',4);toast('🥋 Taekwondo class with Mama');
  setTimeout(()=>{if(phase==='sat_t0'&&!HST.over)satAsk(m,'Mama','Kiwi, are you ready for your Taekwondo class?','Yes Mama, I am ready!','No, I want to sleep',()=>{OFX.pend='tkd';startOFX();go('sat_t1')})},3600)}
 function satTStudents(dt){STK.stu.forEach((e,i)=>{if(e.wp&&e.wp.length){follow(e,dt,e.lock?2.2:1.8);e.pos.y=satInCastle(e.pos)?STK.castle.h:0;return}e.mv=0;
@@ -4140,8 +4141,8 @@ function satUpdT(dt){tickFXP(dt);if(OFX.on)tickOFX(dt);tickTears(dt);satHTick(dt
  if(!(girl.wp&&girl.wp.length)&&phase!=='sat_t3'){if(satInCastle(girl.pos)){K.bnc=(K.bnc||0)+dt;girl.pos.y=STK.castle.h+Math.abs(Math.sin(K.bnc*5))*.75;girl.pose='jump';if(!K.bounce){K.bounce=1;rw1('castle','Boing boing! Kiwi bounced in the air castle!');satSay(girl,'Kiwi','Boing! Boing! This is so fun!',2.6)}}else if(girl.pose==='jump'){girl.pose=null;girl.pos.y=0}}
  if(HST.over)return;if(CRY.on){tickCry(dt);return}if(HST.ask){girl.mv=0;return}const P=phase;
  if(P==='sat_t0'){girl.mv=0}
- else if(P==='sat_t1'){girl.mv=0;if(!OFX.on&&!OFX.pend){go('sat_t2');K.free=0;satRing(0,8);satSay(m,'Mama','Wow! My little Taekwondo star with a yellow-white belt! Let\'s go into the hall.',4.5);toast('Walk into the big Taekwondo hall. Mama will watch you from the bench.')}}
- else if(P==='sat_t2'){freeMove(dt);followG(m,dt,1.0,1.6);if(girl.pos.z<8.2){satRingOff();go('sat_t2b');K.free=0;m.wp=[V(-4.6,0,10.6),V(-4.6,0,9.6)];m.done=e=>{e.sit=true;e.pos.set(-4.6,.44+.12-.5*e.g.scale.x,9.62);e.yaw=Math.PI;e.g.rotation.y=Math.PI};
+ else if(P==='sat_t1'){girl.mv=0;if(!OFX.on&&!OFX.pend){go('sat_t2');K.free=0;K.roam=0;K.ringOn=0;yaw=.2;pitch=.55;dist=13;snap=1;satSay(m,'Mama','Wow! My little Taekwondo star with a yellow-white belt! You can look around for a while before class.',4.5);toast('Walk around the Taekwondo lobby. Look at the TVs, the trophies and the dobok!')}}
+ else if(P==='sat_t2'){freeMove(dt);followG(m,dt,2.4,.8);K.roam+=dt;if(K.roam>18&&!K.ringOn){K.ringOn=1;satRing(0,7.6);dist=Math.max(dist,13);satSay(m,'Mama','Kiwi, it is time for your lesson! Walk to the yellow spot to go into the hall.',4.5);toast('Walk to the yellow spot to start your Taekwondo lesson!')}if(K.ringOn&&girl.pos.z<8.2){satRingOff();go('sat_t2b');K.free=0;m.wp=[V(-4.6,0,10.6),V(-4.6,0,9.6)];m.done=e=>{e.sit=true;e.pos.set(-4.6,.44+.12-.5*e.g.scale.x,9.62);e.yaw=Math.PI;e.g.rotation.y=Math.PI};
    satSay(STK.tut[0],'Master Kim','Welcome, Kiwi! You can play in the air castle while we get ready.',4.5);toast('Play in the air castle (the tigers!) while the tutors get ready. Say hello to your friends!');K.brk=1}}
  else if(P==='sat_t2b'||P==='sat_t5'){freeMove(dt);if(!(girl.wp&&girl.wp.length)){girl.pos.y=satInCastle(girl.pos)?girl.pos.y:0}K.free+=dt;faceTo(STK.tut[0],girl.pos.x,girl.pos.z);if(K.free>(P==='sat_t2b'?24:18)&&!K.wh){K.wh=1;satLineUp(P==='sat_t5')}}
  else if(P==='sat_t4'){if(!K.inL){freeMove(dt);const s=satTLine(2);if(Math.hypot(girl.pos.x-s.x,girl.pos.z-s.z)<.8){K.inL=1;satRingOff();girl.wp=[s.clone()];girl.done=e=>{e.pos.y=0;faceTo(e,0,-12)}}}else if(!(girl.wp&&girl.wp.length))girl.mv=0}
@@ -4181,13 +4182,13 @@ function satHugMamaT(){const m=SY.mama;satRingOff();go('sat_t7');girl.mv=0;girl.
  setTimeout(()=>{satCap('');fade(()=>{SAT.carry=null;SY.mama.pose=null;girl.pose=null;satHomeE()})},7600)}
 function satTUI(){const P=phase,K=SAT.tk||{};
  if(P==='sat_t0'||P==='sat_t1')return['Kiwi gets ready for Taekwondo.',null];
- if(P==='sat_t2')return['Walk into the big Taekwondo hall (yellow ring).',null];
+ if(P==='sat_t2')return[K.ringOn?'Walk to the yellow spot to go into the big hall and start the lesson.':'Look around the Taekwondo lobby for a while.',null];
  if(P==='sat_t2b'||P==='sat_t5')return[satInCastle(girl.pos)?'Boing! Bounce in the air castle!':'Play in the air castle with the tigers, or say hello to your friends and tutors.',null];
  if(P==='sat_t4'){if(!K.inL)return['Line up: walk to your spot on the mat (yellow ring).',null];if(!K.bowd&&!(girl.wp&&girl.wp.length))return[K.end?'Bow to Master Kim to say thank you.':'Bow to Master Kim to start the class.',K.end?'Bow: 多謝師父! Thank you, Master!':'Bow: 師父好! Hello, Master!'];return['',null]}
  if(P==='sat_t6'){const n=satNear(SY.mama,2.2);return[n?'Give Mama a big hug!':'Run to Mama (yellow ring)!',n?'Hug Mama':null]}
  return['',null]}
 function satTAct(){const P=phase,K=SAT.tk;if(P==='sat_t4'&&K.inL&&!K.bowd&&!(girl.wp&&girl.wp.length)){satBow();return true}if(P==='sat_t6'&&satNear(SY.mama,2.2)){satHugMamaT();return true}return true}
-function satTCam(dt){const p=girl.pos,lk=V(p.x+off.x,p.y+1.05+off.y,p.z+off.z);pitch=Math.max(.12,Math.min(1.25,pitch));const D=Math.min(14,Math.max(2.6,dist*ZO*.9)),cp=Math.cos(pitch);
+function satTCam(dt){const p=girl.pos,lk=V(p.x+off.x,p.y+1.05+off.y,p.z+off.z);pitch=Math.max(.12,Math.min(1.25,pitch));const D=Math.min(18,Math.max(2.6,dist*ZO)),cp=Math.cos(pitch);
  let cx=lk.x+Math.sin(yaw)*cp*D,cz=lk.z+Math.cos(yaw)*cp*D,cy=lk.y+Math.sin(pitch)*D;if(p.z>8.2){cx=cl(cx,-11.8+off.x,11.8+off.x);cz=cl(cz,8.3+off.z,17.8+off.z);cy=Math.min(cy,5.0+off.y)}else{cx=cl(cx,-21.7+off.x,21.7+off.x);cz=cl(cz,-21.7+off.z,7.6+off.z);cy=Math.min(cy,7.4+off.y)}
  if(!SAT.tc||snap){SAT.tc=V(cx,cy,cz);SAT.tl=lk.clone();snap=0}SAT.tc.lerp(V(cx,cy,cz),Math.min(1,dt*4));SAT.tl.lerp(lk,Math.min(1,dt*5));cam.position.copy(SAT.tc);cam.lookAt(SAT.tl);look.copy(SAT.tl);const fv=innerWidth<innerHeight?74:62;if(Math.abs(cam.fov-fv)>.05){cam.fov+=(fv-cam.fov)*Math.min(1,dt*3);cam.updateProjectionMatrix()}return true}
 
