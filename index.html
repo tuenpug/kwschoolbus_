@@ -2117,7 +2117,7 @@ const SCL={Y:{kid:['Point your toes like a ballerina!','I love twirling in my tu
  U:{kid:['Have you tried the teacups? They spin so fast!','I want to ride the merry-go-round again!','Look at the big Sky Wheel!','Cotton candy is so fluffy and sweet!','Did you see Mo? Mo gave me a hug!','I won a prize at the booth game!','Let us race the little cars!','The indoor playground has a ball pond!'],adult:['What a sunny day at the park!','Your white dress is so pretty, Kiwi!','Stay close to your Papa and Mama, okay?','The shop has lovely Mo hats!'],staff:['Welcome to SS Park! Have lots of fun!','Try the booth games, you can win a prize!','Hold the rail on the rides, okay?','The Sky Wheel is over there!']},
  I:{kid:['Jump into the ball pond with me!','Let us build a castle with the strips!','Bop the balloon up high!','I climbed to the top of the bird nest!','Mo is dancing on the stage!','Whee! The slide is super fast!','Can you catch the balloon?'],adult:['Have fun playing, little one!','I am watching my son on the slide.','Take turns on the slide, okay?'],staff:['Welcome to the indoor playground!','Shoes off in the ball pond, please!','The show on the stage starts soon!','Climb carefully in the bird nest!']},
  N:{kid:['Stop at the red light!','I wear my helmet when I ride.','Keep left on the road!','Look both ways at the zebra crossing.','My scooter goes zoom!'],adult:['Ride slowly and carefully!','Good job stopping at the light!'],staff:['Remember to keep left!','Stop and look at the zebra crossing.']},
- W:{kid:['I am making a leaf picture!','Can I borrow the glue, please?','Look at my colourful leaves!','I used red and yellow crayons!'],adult:['What a beautiful picture!','Take your time and be creative.'],staff:['Put the glue on the back of the leaf.','Lovely work! Show your Papa later.']},
+ W:{kid:['I am making a leaf picture!','Can I borrow the glue, please?','Look at my colourful leaves!','I used red and yellow crayons!'],adult:['What a beautiful picture!','Take your time and be creative.'],staff:['Put the glue on the back of the paper.','Lovely work! Show your Papa later.']},
  def:{adult:['Hello Kiwi! Have a lovely day!','What a big girl you are!','Stay with your grown-up, okay?','Nice to see you!']}};
 function sceneLines(e){const S_=SCL[scene]||SCL.def,nm=e.nm||'';const st=/^(Ms|Miss|Mr|Coach|Master|Sir|Madam)\b|staff|Teacher|Lifeguard|seller|guard|Helper|Driver|Instructor/i.test(nm),ad=e.adult||(e.g&&e.g._s0>1.3)||(e.g&&e.g.scale.x>1.3);return(st&&S_.staff)||(ad&&(S_.adult||SCL.def.adult))||S_.kid||hiLines}
 $('talk').onclick=talk;
@@ -3827,6 +3827,46 @@ function satArt(t){/* t: 0..10 making time; stages: cut 0-2.6, draw 2.6-5, paint
   const nd=Math.floor(cl01((dec-.4)/.6)*ART.dots.length);g.fillStyle='#fff';for(let i=0;i<nd;i++){const d=ART.dots[i];g.beginPath();g.arc(d[0],d[1],d[2],0,7);g.fill()}}
  SW.tex.needsUpdate=true;
  return{cut,drw,pnt,dec}}
+/* ---- second Creative Learning artwork: the paper-collage fish in the sea (from Kiwi's real picture) ---- */
+const FISH={out:[],loops:[],spots:[],pieces:[]};
+(function(){const q=(a,c,b,n,arr)=>{for(let i=0;i<=n;i++){const u=i/n,v=1-u;arr.push([v*v*a[0]+2*v*u*c[0]+u*u*b[0],v*v*a[1]+2*v*u*c[1]+u*u*b[1]])}};
+ const T0=[178,212],N=[452,240],B0=[178,236];
+ q(T0,[300,140],N,30,FISH.out);q(N,[330,338],B0,30,FISH.out);FISH.out.push([178,212]);
+ let s=11;const r=()=>{s=(s*9301+49297)%233280;return s/233280};
+ /* brown crayon "water bubble" loops all over the sea, like Kiwi's picture */
+ const L=[[40,70,26,36],[95,62,28,34],[170,58,44,30],[150,108,40,28],[240,112,34,26],[300,92,40,30],[330,58,30,24],[372,52,30,26],[400,70,34,30],[440,80,26,32],[360,104,36,24],[420,120,40,28],[468,124,20,30],[85,198,30,48],[475,215,24,26],[90,320,22,22],[78,355,24,14],[200,300,18,22],[215,340,40,28],[290,312,26,22],[318,345,22,18],[350,320,36,26],[388,340,24,24],[420,318,24,22],[470,320,24,24],[440,350,22,18],[260,355,30,16],[140,330,16,14],[500,40,10,18]];
+ L.forEach(a=>FISH.loops.push([a[0],a[1],a[2],a[3],r()*6]));
+ /* red ring spots with turquoise centres on the body */
+ [[300,207],[332,198],[275,232],[308,225],[338,222],[262,262],[300,255],[332,250],[285,286],[318,284],[238,210],[248,248],[355,205]].forEach(p=>FISH.spots.push([p[0],p[1],8+r()*3,r()*6]));
+ /* glued paper pieces: tail, dorsal fin, pectoral fin and seaweed */
+ FISH.pieces=[{k:'tail',c:[146,222],col:'#f6ea3a',pts:[[108,155],[198,214],[130,298],[150,226]]},{k:'dor',c:[275,172],col:'#e2442c',pts:[[210,170],[300,146],[322,146],[344,180],[300,190],[222,196]]},
+  {k:'pec',c:[352,284],col:'#e6252a',pts:[[318,285],[380,264],[356,306]]},{k:'sw1',c:[40,265],col:'#2f8a3a',pts:[[52,150],[72,158],[66,230],[44,372],[10,374],[30,250]]},
+  {k:'sw2',c:[140,335],col:'#7cc63a',pts:[[100,376],[150,282],[168,262],[166,376]]},{k:'sw3',c:[408,300],col:'#7cc63a',pts:[[398,196],[410,198],[412,300],[416,374],[402,374],[404,300]]},{k:'sw4',c:[448,355],col:'#7cc63a',pts:[[440,334],[448,334],[460,384],[452,384]]}]})();
+function satArtFish(t){const g=SW.ctx,w=512,h=384,cl01=v=>Math.max(0,Math.min(1,v));
+ g.fillStyle='#5cc9cc';g.fillRect(0,0,w,h);g.fillStyle='rgba(255,255,255,.05)';for(let i=0;i<40;i++)g.fillRect((i*53)%w,(i*97)%h,3,3);
+ const cut=cl01(t/2.6),drw=cl01((t-2.6)/2.4),pnt=cl01((t-5)/2.5),dec=cl01((t-7.5)/2.5),O=FISH.out;
+ /* brown bubble loops (drawn behind the fish) */
+ if(drw>0){const n=drw*FISH.loops.length;g.strokeStyle='#6e3b33';g.lineWidth=3;g.lineCap='round';FISH.loops.forEach((l,i)=>{if(i>=n)return;const f=Math.min(1,n-i);g.beginPath();for(let k=0;k<=36*f;k++){const a=l[4]+k/36*TAU,wob=1+Math.sin(a*3+l[4])*.06;const x=l[0]+Math.cos(a)*l[2]*wob,y=l[1]+Math.sin(a)*l[3]*wob;k?g.lineTo(x,y):g.moveTo(x,y)}g.stroke()})}
+ /* the seaweed and fins are glued on one by one */
+ const np=pnt*FISH.pieces.length;const piece=(p,a)=>{g.globalAlpha=a;g.fillStyle=p.col;g.beginPath();p.pts.forEach((q,i)=>i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]));g.closePath();g.fill();g.globalAlpha=1};
+ FISH.pieces.forEach((p,i)=>{if(p.k.startsWith('sw')&&i<np)piece(p,Math.min(1,(np-i)*2))});
+ FISH.pieces.forEach((p,i)=>{if(p.k==='tail'&&i<np)piece(p,Math.min(1,(np-i)*2))});
+ /* the lilac paper: a sheet until the fish is cut out */
+ if(cut<1){g.fillStyle='#dcd6ea';g.fillRect(160,130,310,200);g.setLineDash([10,8]);g.strokeStyle='rgba(80,60,120,.6)';g.lineWidth=3;g.beginPath();O.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke();g.setLineDash([]);
+  const n=Math.floor(cut*O.length);g.strokeStyle='#5a4a8a';g.lineWidth=5;g.beginPath();for(let i=0;i<n;i++){const p=O[i];i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1])}g.stroke()}
+ else{g.fillStyle='#d9d4ea';g.beginPath();O.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.closePath();g.fill()}
+ FISH.pieces.forEach((p,i)=>{if((p.k==='dor'||p.k==='pec')&&i<np)piece(p,Math.min(1,(np-i)*2))});
+ /* decorations: stripes, spots, lines, eye, mouth and little blue bubbles */
+ if(dec>0){g.lineCap='round';
+  if(np>=2){g.strokeStyle='rgba(255,255,255,.9)';g.lineWidth=4;const ns=Math.floor(cl01(dec*3)*9);for(let i=0;i<ns;i++){const x=228+i*11;g.beginPath();g.moveTo(x,186-i*1.5);g.lineTo(x+3,160-i*1.2);g.stroke()}
+   g.strokeStyle='#f39a2c';g.lineWidth=3;[[125,180,170,210],[120,200,160,225],[140,250,165,232]].slice(0,Math.ceil(cl01(dec*3)*3)).forEach(a=>{g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(a[2],a[3]);g.stroke()})}
+  const nsp=Math.floor(cl01((dec-.1)/.55)*FISH.spots.length);FISH.spots.forEach((sp,i)=>{if(i>=nsp)return;g.strokeStyle='#d0262a';g.lineWidth=3.5;g.beginPath();g.ellipse(sp[0],sp[1],sp[2],sp[2]*.8,sp[3],0,7);g.stroke();g.fillStyle='#4fc3a8';g.beginPath();g.ellipse(sp[0],sp[1],sp[2]*.38,sp[2]*.3,0,0,7);g.fill()});
+  if(dec>.6){g.strokeStyle='#1a1a1a';g.lineWidth=2.5;g.beginPath();g.moveTo(366,190);g.lineTo(368,290);g.moveTo(228,229);g.lineTo(322,239);g.stroke();
+   g.beginPath();g.arc(395,214,14,0,7);g.stroke();g.fillStyle='#1a1a1a';g.beginPath();g.arc(397,212,3.5,0,7);g.fill();[[420,238,438,232],[422,244,440,242],[424,250,438,252]].forEach(a=>{g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(a[2],a[3]);g.stroke()})}
+  if(dec>.8){g.strokeStyle='#3aa0e0';g.lineWidth=2;[[462,226,4],[470,214,5],[466,200,3.5],[475,240,6]].forEach(b=>{g.beginPath();g.arc(b[0],b[1],b[2],0,7);g.stroke()})}}
+ SW.tex.needsUpdate=true;return{cut,drw,pnt,dec}}
+function satArtAny(t){return SW.kind==='fish'?satArtFish(t):satArt(t)}
+
 /* map a point on the artwork canvas to the table top */
 function satArtXZ(u,v){return V((u/512-.5)*.52,.52,-.72+(v/384-.5)*.39)}
 
@@ -4071,30 +4111,36 @@ function satBackC(){show('C');G.C.add(girl.g);satReset(girl);girl.pos.set(6.4,0,
  yaw=-Math.PI/2+.35;pitch=.34;dist=8.5;snap=1;go('sat_c5');satRing(15.2,3.8);satSay(papa,'Papa','Kiwi! Papa is here! Come and give me a big hug!',4.5);toast('The class is over! Papa is waiting at the gate. Walk to him and give him a hug.')}
 function satHugPapa(){SAT.hugP=1;satRingOff();go('sat_c6');girl.mv=0;girl.noSep=papa.noSep=1;faceTo(girl,papa.pos.x,papa.pos.z);const dx=papa.pos.x-girl.pos.x,dz=papa.pos.z-girl.pos.z,dl=Math.hypot(dx,dz)||1;papa.pos.set(girl.pos.x+dx/dl*.62,0,girl.pos.z+dz/dl*.62);faceTo(papa,girl.pos.x,girl.pos.z);papa.pose='khug';girl.pose='hug';
  {const ux=dx/dl,uz=dz/dl;SAT.cin={p:V(girl.pos.x-ux*2.5-uz*.9,2.75,girl.pos.z-uz*2.5+ux*.9),l:V(papa.pos.x-ux*.2,1.45,papa.pos.z-uz*.2),f:54};SAT.cp=null}
- satHearts(girl,10,1.3);rw2('hug','A big hug for Papa!');sayE=papa;sayT=5;$('say').innerHTML='<b>Kiwi</b>: Papa! I made a leaf picture!<br><b>Papa</b>: It is beautiful, Kiwi! I love you so much.';
+ satHearts(girl,10,1.3);rw2('hug','A big hug for Papa!');sayE=papa;sayT=5;$('say').innerHTML='<b>Kiwi</b>: Papa! I made a '+(SW.kind==='fish'?'fish':'leaf')+' picture!<br><b>Papa</b>: It is beautiful, Kiwi! I love you so much.';
  setTimeout(()=>{SAT.carry=papa;papa.pose='carry';if(SAT.cin)SAT.cin.l.y=1.85;satHearts(girl,6,2.2);satSay(papa,'Papa','Up you go! Now let\'s go to your ballet class!',4)},3400);setTimeout(()=>fade(()=>{SAT.carry=null;girl.noSep=papa.noSep=0;satEnterY()}),7200)}
 
 /* ---------- 3. Creative Learning: Kiwi makes her artwork (about 10 seconds) ---------- */
 function satEnterW(){SW.out=0;show('W');G.W.add(girl.g);satReset(girl);arrow.visible=false;girl.sit=true;girl.pos.set(0,.3+.12-.5,.02);girl.yaw=Math.PI;girl.g.rotation.y=Math.PI;
  satReset(SW.tea);SW.tea.pos.set(-.95,0,-1.75);faceTo(SW.tea,0,-.72);SW.kids.forEach((k,i)=>{satReset(k);k.sit=true;k.pos.set([2.35,3.05,-2.7][i],.3+.12-.5*k.g.scale.x,.02);k.yaw=Math.PI;k.g.rotation.y=Math.PI;k.pose='type';k.wph=i*2});
- SW.art.quaternion.copy(SW.q0);SW.art.position.set(0,.495,-.72);satArt(0);SW.t=0;SW.sb=0;SAT.cin={p:V(2.4,2.3,2.4),l:V(0,.55,-.6),f:55};SAT.cp=null;go('sat_w');satHTick(0);
- satSay(SW.tea,'Teacher','Welcome to Creative Learning class! Today we make a leaf picture.',4);satCap('🎨 Creative Learning class')}
+ SW.kind=(window.ART_FORCE||(Math.random()<.9?'fish':'leaf'));SW.art.quaternion.copy(SW.q0);SW.art.position.set(0,.495,-.72);satArtAny(0);SW.t=0;SW.sb=0;SAT.cin={p:V(2.4,2.3,2.4),l:V(0,.55,-.6),f:55};SAT.cp=null;go('sat_w');satHTick(0);
+ satSay(SW.tea,'Teacher','Welcome to Creative Learning class! Today we make a '+(SW.kind==='fish'?'fish in the sea':'leaf picture')+'.',4);satCap('🎨 Creative Learning class')}
 function satToolAt(o,u,v,h,rot){const p=satArtXZ(u,v);o.visible=true;o.position.set(p.x,p.y+(h||0),p.z);if(rot!==undefined)o.rotation.y=rot}
 function satUpdW(dt){satHTick(dt);const t=SW.t+=dt,T_=SW.tools,mt=t-1.4;girl.mv=0;
  SW.kids.forEach(k=>{k.pose='type'});
- const r=satArt(Math.max(0,Math.min(10,mt)));
+ const r=satArtAny(Math.max(0,Math.min(10,mt)));const FS=SW.kind==='fish';
  Object.values(T_).forEach(o=>o.visible=false);
  if(mt>0&&mt<10){girl.pose='type';girl.wph=t*4;
+  if(FS){if(mt<2.6){const i=Math.min(FISH.out.length-1,Math.floor(r.cut*FISH.out.length)),p=FISH.out[i];satToolAt(T_.sc,p[0],p[1],.015,Math.atan2(1,0)+Math.sin(t*3)*.3);T_.sc.children.forEach(c=>{if(c.userData.s)c.rotation.y=c.userData.s*(.08+Math.abs(Math.sin(t*14))*.25)})}
+   else if(mt<5){const n=Math.min(FISH.loops.length-1,Math.floor(r.drw*FISH.loops.length)),l=FISH.loops[n],a=t*7;satToolAt(T_.cr,l[0]+Math.cos(a)*l[2],l[1]+Math.sin(a)*l[3],.04,.6)}
+   else if(mt<7.5){const n=Math.min(FISH.pieces.length-1,Math.floor(r.pnt*FISH.pieces.length)),c=FISH.pieces[n].c;satToolAt(T_.dt,c[0],c[1],.05+Math.abs(Math.sin(t*9))*.03,0)}
+   else{const n=Math.min(FISH.spots.length-1,Math.floor(Math.max(0,(r.dec-.1)/.55)*FISH.spots.length)),q=r.dec<.6?FISH.spots[n]:[395,214];satToolAt(T_.cr,q[0]+Math.sin(t*20)*5,q[1]+Math.cos(t*18)*5,.04,.3)}}
+  else{
   if(mt<2.6){const i=Math.min(ART.leaf.length-1,Math.floor(r.cut*ART.leaf.length)),p=ART.leaf[i];satToolAt(T_.sc,p[0],p[1],.015,Math.atan2(1,0)+Math.sin(t*3)*.3);T_.sc.children.forEach(c=>{if(c.userData.s)c.rotation.y=c.userData.s*(.08+Math.abs(Math.sin(t*14))*.25)});
    SW.scr.forEach((m,j)=>{const k=(mt*2.3+j*.37)%1.2;m.visible=k<1&&mt>.4;const q=satArtXZ(60+j*48,330);m.position.set(q.x+.03*Math.sin(j*3),.5-k*.42+.06,q.z+.18+.05*j%.1);m.rotation.set(k*5+j,k*3,j)})}
   else{SW.scr.forEach(m=>{if(m.position.y>.03)m.position.y=Math.max(.02,m.position.y-dt*.4);m.rotation.x=-Math.PI/2})}
   if(mt>=2.6&&mt<5){const n=Math.max(0,Math.min(ART.rib.length-1,Math.floor(r.drw*ART.rib.length))),vi=Math.floor(r.drw*ART.veins.length),p=r.drw<.55?ART.rib[n]:(ART.veins[Math.min(ART.veins.length-1,vi)]||[ART.rib[n]])[0];satToolAt(T_.cr,p[0]+Math.sin(t*25)*6,p[1]+Math.cos(t*21)*6,.04,.6)}
   if(mt>=5&&mt<7.5){const a=-Math.PI/2+r.pnt*TAU;satToolAt(T_.br,362+Math.cos(a)*60,252+Math.sin(a)*60,.05,-a)}
-  if(mt>=7.5&&mt<10){if(r.dec<.4){const i=Math.min(ART.scrib.length-1,Math.floor(r.dec*2*ART.scrib.length)),p=ART.scrib[i];satToolAt(T_.cr,p[0],p[1],.04,.3)}else{const i=Math.min(ART.dots.length-1,Math.floor((r.dec-.4)/.6*ART.dots.length)),d=ART.dots[i];satToolAt(T_.dt,d[0],d[1],.05+Math.abs(Math.sin(t*10))*.03,0)}}}
+  if(mt>=7.5&&mt<10){if(r.dec<.4){const i=Math.min(ART.scrib.length-1,Math.floor(r.dec*2*ART.scrib.length)),p=ART.scrib[i];satToolAt(T_.cr,p[0],p[1],.04,.3)}else{const i=Math.min(ART.dots.length-1,Math.floor((r.dec-.4)/.6*ART.dots.length)),d=ART.dots[i];satToolAt(T_.dt,d[0],d[1],.05+Math.abs(Math.sin(t*10))*.03,0)}}}}
  const tp=SW.tea;tp.pose=(mt>0&&mt<10)?((Math.floor(mt*1.5)%3===0)?'give':null):null;
  const cap=(s,c,txt)=>{if(SW.sb===s&&mt>c){SW.sb=s+1;if(txt[0])satSay(SW.tea,'Teacher',txt[0],3.4);satCap(txt[1])}};
- cap(0,0,['First, cut the green paper into a leaf.','✂️ Cut the paper into a leaf']);cap(1,2.6,['Now draw the lines on the leaf with a brown crayon.','🖍️ Draw the leaf lines']);cap(2,5,['Paint a big red circle. Round and round!','🖌️ Paint a big red circle']);cap(3,7.5,['Decorate it! A little spider and white dots.','✨ Decorate with a spider and dots']);
- if(SW.sb===4&&mt>10.3){SW.sb=5;satCap('🌟 Ta-da! Kiwi\'s artwork!');satSay(girl,'Kiwi','Ta-da! Look at my picture!',3);rw2('satArt','Kiwi made a beautiful artwork!');satHearts(girl,10,1.5);SW.tea.pose='clap';setTimeout(()=>{if(scene==='W')satSay(SW.tea,'Teacher','Wonderful work, Kiwi! You can take it home.',3.4)},1800)}
+ if(FS){cap(0,0,['First, cut the purple paper into a big fish.','✂️ Cut out the fish']);cap(1,2.6,['Now draw lots of round bubbles in the sea with a brown crayon.','🖍️ Draw bubbles in the sea']);cap(2,5,['Glue on the yellow tail, the red fins and the green seaweed.','🧴 Glue on the tail, fins and seaweed']);cap(3,7.5,['Decorate your fish! Red spots, an eye and little bubbles.','✨ Decorate the fish'])}else{
+ cap(0,0,['First, cut the green paper into a leaf.','✂️ Cut the paper into a leaf']);cap(1,2.6,['Now draw the lines on the leaf with a brown crayon.','🖍️ Draw the leaf lines']);cap(2,5,['Paint a big red circle. Round and round!','🖌️ Paint a big red circle']);cap(3,7.5,['Decorate it! A little spider and white dots.','✨ Decorate with a spider and dots'])}
+ if(SW.sb===4&&mt>10.3){SW.sb=5;satCap('🌟 Ta-da! Kiwi\'s artwork!');satSay(girl,'Kiwi',SW.kind==='fish'?'Ta-da! Look at my big fish swimming in the sea!':'Ta-da! Look at my picture!',3);rw2('satArt','Kiwi made a beautiful artwork!');satHearts(girl,10,1.5);SW.tea.pose='clap';setTimeout(()=>{if(scene==='W')satSay(SW.tea,'Teacher','Wonderful work, Kiwi! You can take it home.',3.4)},1800)}
  if(mt>10.3){const u=Math.min(1,(mt-10.3)/.8),e=u*u*(3-2*u);girl.pose='recv';SW.art.quaternion.copy(SW.q0).slerp(SW.q1,e);SW.art.position.set(0,lp(.495,.92,e),lp(-.72,-.47,e))}
  /* camera: wide, then over Kiwi's shoulder, then from the front for ta-da */
  const C=SAT.cin;if(mt<.6){C.p.set(2.4,2.3,2.4);C.l.set(0,.55,-.6);C.f=55}else if(mt<10.3){C.p.set(1.05+Math.sin(t*.35)*.1,2.1,.12);C.l.set(-.03,.48,-.74);C.f=44}else{C.p.set(.25,1.15,-2.35);C.l.set(0,.92,-.2);C.f=52}
@@ -4688,7 +4734,7 @@ function satHugPM(){const m=SY.mama,n=SAT.n;satRingOff();go('sat_n4');girl.mv=0;
  sayE=girl;sayT=7;$('say').innerHTML='<b>Kiwi</b>: Papa! Mama! I learnt how to ride my '+(SAT.ride==='bike'?'bicycle':'scooter')+'! Thank you Papa and Mama! I had an enjoyable weekend!<br><b>Mama</b>: We are so proud of you, Kiwi!<br><b>Papa</b>: You followed all the road rules. Well done!';
  SAT.cin={p:V(girl.pos.x+3.2,2.4,girl.pos.z-3.4),l:V(cx,1.3,cz),f:58};SAT.cp=null;
  const hT=setInterval(()=>{if(!SAT.on||HST.over){clearInterval(hT);return}satHeart(girl.pos.x+(rnd()-.5)*1.4,1.2+rnd()*.8,girl.pos.z+(rnd()-.5)*1.4,rnd()<.3)},240);
- setTimeout(()=>{clearInterval(hT);HST.over=true;satCap('');famEndSafe(()=>showEnd('What a lovely weekend!','Kiwi ate breakfast with Papa, made a leaf picture at Creative Learning, danced with Ms Wan and Rochelle, napped in her car seat, was a brave Taekwondo star, and learnt to ride her scooter safely at the Road Safety Park. Thank you Papa and Mama!'))},9500)}
+ setTimeout(()=>{clearInterval(hT);HST.over=true;satCap('');famEndSafe(()=>showEnd('What a lovely weekend!','Kiwi ate breakfast with Papa, made a '+(SW.kind==='fish'?'fish':'leaf')+' picture at Creative Learning, danced with Ms Wan and Rochelle, napped in her car seat, was a brave Taekwondo star, and learnt to ride her scooter safely at the Road Safety Park. Thank you Papa and Mama!'))},9500)}
 function satNUI(){const P=phase,n=SAT.n||{};
  if(P==='sat_n0')return['',null];
  if(P==='sat_n1'){const nr=Math.hypot(girl.pos.x+36.2,girl.pos.z-20.8)<1.6;return[nr?'Your scooter and bicycle are here! Choose one, put on your helmet and ride.':'Walk into the park and find your scooter and bicycle by the benches (yellow ring).',nr?'🛴🚲 Choose my ride':null]}
@@ -5885,7 +5931,7 @@ function plEnd(){const T=PL;if(T.over)return;T.over=1;T.timerOn=0;go('sat_o2');p
   setTimeout(()=>{satSay(pa,'Papa','You were so brave in the water today! Papa is proud of you.',3.6)},3600);
   setTimeout(()=>{girl.waveT=3;girl.w2=1;satSay(girl,'Kiwi','Thank you Papa and Mama! I love the pool party! Splash splash!',4);satHearts(girl,12,1.4);[pa,m].forEach(e=>{e.waveT=3})},7400);
   setTimeout(()=>{HST.over=true;satCap('');const rd=T.rode.slice(0,3),rs=rd.length?' riding the '+(rd.length>1?rd.slice(0,-1).join(', ')+' and '+rd[rd.length-1]:rd[0])+',':' floating with Papa,';
-   famEndSafe(()=>showEnd('What a lovely weekend!','Kiwi ate breakfast with Papa, made a leaf picture at Creative Learning, danced with Ms Wan and Rochelle, napped in her car seat, was a brave Taekwondo star, and splashed at the pool party with Papa:'+rs+' squirting water guns and playing catch in the water. Thank you Papa and Mama!'))},12200)}),1800)}
+   famEndSafe(()=>showEnd('What a lovely weekend!','Kiwi ate breakfast with Papa, made a '+(SW.kind==='fish'?'fish':'leaf')+' picture at Creative Learning, danced with Ms Wan and Rochelle, napped in her car seat, was a brave Taekwondo star, and splashed at the pool party with Papa:'+rs+' squirting water guns and playing catch in the water. Thank you Papa and Mama!'))},12200)}),1800)}
 function plHugMama(){const T=PL;T.said.mhug=1;const m=SY.mama;faceTo(girl,m.pos.x,m.pos.z);faceTo(m,girl.pos.x,girl.pos.z);girl.pose='hug';m.pose='hug';satHearts(girl,8,1.4);satSay(m,'Mama','A big wet hug! Hehe! Have fun with Papa, sweetie.',3);setTimeout(()=>{girl.pose=null;m.pose=null},1500);rw1('pl_mama','Kiwi hugged Mama!')}
 
 /* ---------- per-frame update ---------- */
